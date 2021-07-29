@@ -1,0 +1,10 @@
+package com.littlePick.service;
+
+import com.littlePick.domain.MemberVO;
+
+public interface MemberService {
+	public int userInsert(MemberVO vo );
+	public MemberVO idCheck_Login( MemberVO vo);
+	
+
+}

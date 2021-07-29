@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+C:\zzz\workspace\littlePick\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3533656641.index
+\littlePick\src\main\java
+C:\zzz\workspace\littlePick\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3602919938.index
+\littlePick\src\main\java
+C:\zzz\workspace\littlePick\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3028594479.index
+\littlePick\src\main\java

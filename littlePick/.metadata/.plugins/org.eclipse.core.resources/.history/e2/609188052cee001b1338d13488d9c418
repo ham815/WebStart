@@ -1,0 +1,11 @@
+package com.littlePick.domain;
+
+public class CartVO {
+	
+	private int user_num;
+	private int product_num;
+	private int product_count;
+	
+	
+
+}

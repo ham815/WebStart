@@ -1,0 +1,12 @@
+package com.littlePick.service;
+
+import com.littlePick.domain.CartVO;
+
+public interface CartService {
+	
+	//장바구니 추가
+	public void cartInsert(CartVO vo);
+	
+	
+
+}

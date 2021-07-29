@@ -1,0 +1,24 @@
+package com.littlePick.domain;
+
+
+public class MemberVO {
+	private int user_num;
+	private String user_name;
+	private String user_email;
+	
+	
+	public String getUser_num() {
+		return user_num;
+	}
+	public void setUser_num(String user_num) {
+		this.user_num = user_num;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	
+
+}

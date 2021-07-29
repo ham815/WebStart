@@ -1,0 +1,34 @@
+package com.littlePick.service;
+
+import java.util.List;
+
+import com.littlePick.domain.CartVO;
+
+public interface CartService {
+	
+	//장바구니 추가
+	public void cartInsert(CartVO vo);
+	
+	//장바구니 목록
+	public List<CartVO> cartList(int user_num);
+	
+	//장바구니 개별 삭제
+	public String cartDelete(int cart_num);
+	
+	//장바구니 비우기
+	public String cartDeleteAll(int cart_num);
+	
+	//장바구니 수정 
+	public String cartUpdate();
+	
+	//장바구니 금액 합계
+	public int cartTotal(String user_num);
+	
+	//장바구니 상품 확인 
+	public int cartCount(int product_num, String user_num);
+	
+	//장바구니 상품 수량 변경 
+	
+	
+
+}

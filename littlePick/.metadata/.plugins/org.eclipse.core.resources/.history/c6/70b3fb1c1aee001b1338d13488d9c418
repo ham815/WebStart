@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+<!-- <select id="idCheck" parameterType="member" resultType="member">
+	SELECT * FROM member 
+	WHERE userId=#{userId} 
+	<if test="userPass != null">
+		AND userPass=#{userPass}
+	</if>	
+</select> -->
+
+<!-- memberDao의 userInsert  -->
+<insert id="userInsert" parameterType="member">
+	INSERT INTO Member_tb 
+	(user_num, user_name, user_email, user_password,user_nickname,user_phone,user_address,user_gender,user_birth)
+	VALUES(select case count(*) when 0 then 1 else max(seq) + 1 end, #{user_name}, #{user_email}, #{user_password}, #{user_nickname}, #{user_phone}, #{user_address}, #{user_gender}, #{user_birth} )
+INSERT INTO Member_tb 
+    values(null,#{user_name},#{user_email},#{user_password},#{user_nickname},#{user_phone},#{user_address}, #{user_gender},#{user_birth},sysdate(),#{user_point},#{user_image});
+
+<!-- 		  #{user_regdate},
+		   #{user_point},
+		   #{user_image} -->
+</insert>
+
+
+</mapper>

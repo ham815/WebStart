@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\zzz\workspace\littlePick\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1106442036.index
+2552466346.index
+2098572859.index
+3533656641.index
+609881849.index
+433405117.index
+1053016511.index

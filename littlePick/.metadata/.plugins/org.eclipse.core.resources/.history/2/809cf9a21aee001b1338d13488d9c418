@@ -1,0 +1,17 @@
+package com.littlePick.dao;
+
+import com.littlePick.domain.MemberVO;
+
+public interface MemberDAO {
+
+	
+	//id 중복체크
+	//MemberVO  idCheck( MemberVO vo );
+	
+	//회원가입
+	int userInsert(MemberVO vo);
+	
+	//로그인 확인
+	//MemberVO userLogin(MemberVO vo);
+	
+}

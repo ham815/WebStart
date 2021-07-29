@@ -1,0 +1,29 @@
+package com.littlePick.dao;
+
+import java.util.List;
+
+import com.littlePick.domain.CartVO;
+
+public interface CartDAO {
+	
+	//장바구니 추가
+	public void cartInsert(CartVO vo);
+	
+	//장바구니 목록
+	public List<CartVO> cartList(int cart_num);
+	
+	//장바구니 개별 삭제
+	public String cartDelete(int cart_num);
+	
+	//장바구니 비우기
+	public String cartDeleteAll(int cart_num);
+	
+	//장바구니 수정 
+	public String cartUpdate(CartVO vo);
+	
+
+	
+	
+	
+
+}

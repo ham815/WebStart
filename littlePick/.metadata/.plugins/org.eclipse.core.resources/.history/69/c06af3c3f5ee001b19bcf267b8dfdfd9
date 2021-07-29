@@ -1,0 +1,44 @@
+package com.littlePick.domain;
+
+public class CartVO {
+	
+	private int cart_num;
+	private String user_email;
+	private int product_num;
+	private int product_count;
+	
+	private String user_name;
+	private String product_name;
+	private int sale_price;
+	
+	
+	public int getCart_num() {
+		return cart_num;
+	}
+	public void setCart_num(int cart_num) {
+		this.cart_num = cart_num;
+	}
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+	public int getProduct_num() {
+		return product_num;
+	}
+	public void setProduct_num(int product_num) {
+		this.product_num = product_num;
+	}
+	public int getProduct_count() {
+		return product_count;
+	}
+	public void setProduct_count(int product_count) {
+		this.product_count = product_count;
+	}
+	
+	
+	
+
+
+}

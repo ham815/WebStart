@@ -1,0 +1,12 @@
+package com.littlePick.domain;
+
+
+public class MemberVO {
+	private int user_num;
+	private String user_name;
+	private String user_email;
+	
+
+	
+
+}

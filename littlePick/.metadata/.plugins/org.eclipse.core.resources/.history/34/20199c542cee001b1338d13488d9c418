@@ -1,0 +1,10 @@
+package com.littlePick.dao;
+
+import com.littlePick.domain.CartVO;
+
+public class CartDAO {
+	
+	void insertcart(CartVO vo);
+	
+
+}

@@ -1,0 +1,56 @@
+$(function(){
+	
+	var chkObj = document.getElementsByName("item_check");
+	var rowCnt = chkObj.length;
+	
+	$("input[name='all_check']").click(function(){
+
+		let chk_listArr = $("input[name='item_check']");
+		for(let i=0; i<chk_listArr.length; i++){
+			chk_listArr[i].checked = this.checked;
+		}
+	});
+	
+	$("input[name='all_check']").click(function(){
+		if($("input[name='item_check':checked]").lenth == rowCnt){
+			$("input[name='item_check']")[0].checked=true;
+		}
+		else{
+			$("input[name='all_check']")[0].checked=false;
+		}
+	});
+});
+
+function deleteValue(){
+	
+	var cart_num = new Array();
+	
+	var list = $("input[name='item_check']");
+	var list_check = $("input[name='item_check']:checked");
+	alert("list사이즈"+list.length)
+	for(var i = 0; i<list.length; i++){
+		if(list_check){ //선택되어 있으면 배열게 값을 저장함
+			alert(list_check[i].value)
+			cart_num.push(list_check[i].value);
+		}
+	}
+	alert(cart_num);
+	if(cart_num.length==0){
+		alert("선택된 글이 없습니다.");
+	}
+	else{
+		var chk=confirm("정말 삭제하시겠습니까?")
+		$.ajax({
+			url: "cartDeleteList.do",	//전송 url
+			type: 'POST',
+			//traditional:true,
+			data:{
+				cart_num : cart_num	 //보내고자 하는 data 변수 설정 
+			},
+			success: function(message){
+				alert(message);
+			}
+			
+		});
+	}
+}

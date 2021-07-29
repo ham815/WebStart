@@ -1,0 +1,58 @@
+package com.littlePick.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.littlePick.dao.CartDAOImple;
+import com.littlePick.domain.CartVO;
+
+@Service
+public class CartserviceImple implements CartService {
+	
+	@Autowired
+	CartDAOImple cartDAO;
+	
+	//장바구니 추가
+	public void cartInsert(CartVO vo) {
+		cartDAO.cartInsert(vo);
+	}
+	
+	//장바구니 목록
+	public List<CartVO> cartList(int user_num){
+		return cartDAO.cartList(user_num);
+	}
+	
+	//장바구니 개별 삭제
+	public void cartDelete(int cart_num) {
+		cartDAO.cartDelete(cart_num);
+	}
+	
+	//장바구니 비우기
+	public void cartDeleteAll(int cart_num) {
+		cartDAO.cartDeleteAll(cart_num);
+	}
+	
+	//장바구니 수정 
+	public void cartModify() {
+		cartDAO.cartModify(vo);
+	}
+	
+	//장바구니 금액 합계
+	public int cartTotal(String user_num) {
+		return cartDAO.cartTotal(user_num);
+	}
+	
+	//장바구니 동일한 상품 레코드 확인
+	public int cartCount(int product_num, String user_num) {
+		
+	}
+	
+	//장바구니 상품 수량 변경 
+	public void cartUpdate(CartVO vo) {
+		
+	}
+
+
+}

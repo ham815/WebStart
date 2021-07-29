@@ -1,0 +1,70 @@
+package com.littlePick.domain;
+
+public class CartVO {
+	
+	//Cart_tb 변수
+	private int cart_num;
+	private String user_email;
+	private int product_num;
+	private int product_count;
+	//Member_tb 변수 
+	private String user_name;
+	//Product_tb 변수
+	private String product_name;
+	private int sale_price;
+	
+	//장바구니 상품별 합계 : sale_price*product_count
+	private int single_price;
+	
+	
+	public int getCart_num() {
+		return cart_num;
+	}
+	public void setCart_num(int cart_num) {
+		this.cart_num = cart_num;
+	}
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+	public int getProduct_num() {
+		return product_num;
+	}
+	public void setProduct_num(int product_num) {
+		this.product_num = product_num;
+	}
+	public int getProduct_count() {
+		return product_count;
+	}
+	public void setProduct_count(int product_count) {
+		this.product_count = product_count;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public int getSale_price() {
+		return sale_price;
+	}
+	public void setSale_price(int sale_price) {
+		this.sale_price = sale_price;
+	}
+	
+	
+
+	
+	
+	
+
+
+}

@@ -1,0 +1,33 @@
+package com.javassem.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.javassem.dao.MemberDAOImpl;
+import com.javassem.domain.MemberVO;
+
+@Service("memberService") //호출 변수 지정 , 지정안하면 클래스 첫글자를 소문자로 해서 사용할 수 있음
+public class MemberServiceImpl implements MemberService{
+
+	@Autowired //자동 연결 .. 뭐랑?? 
+	private MemberDAOImpl memberDAO;
+	
+	
+	/**
+	  * 아이디 중복 체크하는 sql + 로그인 기능 sql
+	  */
+	  public MemberVO idCheck_Login( MemberVO vo)
+	  {
+		  return memberDAO.idCheck(vo);
+	  }
+	  
+	  
+	  /**
+	   * 회원가입 sql
+	   */
+	   public int userInsert(MemberVO vo )
+	   {
+		  return memberDAO.memberInsert(vo);
+	   }
+}

@@ -1,0 +1,5 @@
+package com.littlePick.domain;
+
+public class CartVO {
+
+}
