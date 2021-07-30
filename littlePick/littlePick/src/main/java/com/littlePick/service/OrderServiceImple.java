@@ -14,10 +14,15 @@ public class OrderServiceImple implements OrderService{
 	@Autowired
 	OrderDAOImple orderDAO;
 	
-	//주문목록 추가 
-	public void insertOrder(ProductVO vo) {
-		orderDAO.insertOrder(vo);
-	};
+	public void insertOrderInfo(ProductVO vo) {
+		System.out.println("===> orderMapper insertOrderInfo() 호출");
+		orderDAO.insertOrderInfo(vo);
+	}
+	
+//	public void orderInfoDetails(ProductVO vo) {
+//		System.out.println("===> orderMapper orderInfoDetails() 호출");
+//		orderDAO.orderInfoDetails(vo);
+//	}
 
 
 }

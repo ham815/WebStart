@@ -14,10 +14,15 @@ public class OrderDAOImple implements OrderDAO{
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public void insertOrder(ProductVO vo) {
-		System.out.println("===> orderMapper orderInsert() 호출");
-		mybatis.insert("orderMapper.orderInsert",vo);
+	public void insertOrderInfo(ProductVO vo) {
+		System.out.println("===> orderMapper insertOrderInfo() 호출");
+		mybatis.insert("orderMapper.insertOrderInfo",vo);
 	}
+	
+//	public void orderInfoDetails(ProductVO vo) {
+//		System.out.println("===> orderMapper orderInfoDetails() 호출");
+//		mybatis.insert("orderMapper.orderInfoDetails",vo);
+//	}
 
 
 }

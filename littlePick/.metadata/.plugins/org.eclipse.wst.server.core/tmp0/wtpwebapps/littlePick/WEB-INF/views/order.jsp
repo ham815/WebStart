@@ -26,26 +26,23 @@
 					<th colspan="4">주문내역</th>
 				</tr>
 				<tr><td class=delivery_type colspan="4"><i class="fas fa-truck"></i>&nbsp;&nbsp;일반배송</td></tr>
-				<c:forEach items="${map.list }" var="c" >			
-					<c:if test="${c.delivery_num==1}">
+				<c:forEach items="${map.listNormal }" var="n" >		
 						<tr>
-							<td width="150"><img src="resources/img/product/${c.product_image }" alt="" width="150"></td>
-							<td>${c.product_name }</td>
-							<td width="100">${c.product_count }</td>
-							<td class="price_align" width="200">${c.single_price}원</td>
-						</tr>					
-					</c:if>
+							<td width="150"><img src="resources/img/product/${n.product_image }" alt="" width="150"></td>
+							<td>${n.product_name }</td>
+							<td width="100">${n.product_count }</td>
+							<td class="price_align" width="200">${n.single_price}원</td>
+						</tr>
 				</c:forEach>
+				
 				<tr><td class=delivery_type colspan="4"><i class="fas fa-shipping-fast"></i>&nbsp;&nbsp;샛별배송</td></tr>
-				<c:forEach items="${map.list }" var="c" >			
-					<c:if test="${c.delivery_num==2 or c.delivery_num==3}">
+				<c:forEach items="${map.listStar }" var="s" >
 						<tr>
-							<td width="150"><img src="resources/img/product/${c.product_image }" alt="" width="150"></td>
-							<td>${c.product_name }</td>
-							<td width="100">${c.product_count }</td>
-							<td class="price_align" width="200">${c.single_price}원</td>
-						</tr>					
-					</c:if>
+							<td width="150"><img src="resources/img/product/${s.product_image }" alt="" width="150"></td>
+							<td>${s.product_name }</td>
+							<td width="100">${s.product_count }</td>
+							<td class="price_align" width="200">${s.single_price}원</td>
+						</tr>
 				</c:forEach>
 				<tr></tr>
 
@@ -58,15 +55,15 @@
 	
 				<tr>
 					<td>이름</td>
-					<td colspan="3">${map.list.get(0).user_name}</td>
+					<td colspan="3">${map.user_name}</td>
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td colspan="3">${map.list.get(0).user_phone}</td>
+					<td colspan="3">${map.user_phone}</td>
 				</tr>
 				<tr>
 					<td>이메일</td>
-					<td colspan="3">${map.list.get(0).user_email}</td>
+					<td colspan="3">${map.user_email}</td>
 				</tr>
 
 				<tr></tr>
@@ -78,7 +75,7 @@
 				</tr>
 				<tr>
 					<td>배송지</td>
-					<td id="order_address" colspan="3">${map.list.get(0).user_address}</td>
+					<td id="order_address" colspan="3">${map.user_address}</td>
 				</tr>
 				<tr></tr>
 

@@ -10,7 +10,9 @@ public interface CartDAO {
 	public void cartInsert(ProductVO vo);
 	
 	//장바구니 목록
-	public List<ProductVO> cartList(ProductVO vo);
+//	public List<ProductVO> cartList(ProductVO vo);
+	public List<ProductVO> cartListNormal(ProductVO vo);
+	public List<ProductVO> cartListStar(ProductVO vo);
 	
 	//장바구니 삭제 버튼으로 하나씩 삭제  
 	public void cartDelete(int cart_num);

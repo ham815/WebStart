@@ -23,14 +23,18 @@ public class CartDAOImple implements CartDAO {
 	}
 	
 	//장바구니 목록
-	public List<ProductVO> cartList(int user_num){
-		System.out.println("===>  CartMapper cartList() 호출");
-		return mybatis.selectList("cartMapper.cartList", user_num);
-	}
+//	public List<ProductVO> cartList(int user_num){
+//		System.out.println("===>  CartMapper cartList() 호출");
+//		return mybatis.selectList("cartMapper.cartList", user_num);
+//	}
 	
-	public List<ProductVO> cartList(ProductVO vo){
-		System.out.println("===>  CartMapper cartList() 호출");
-		return mybatis.selectList("cartMapper.cartList", vo);
+	public List<ProductVO> cartListNormal(ProductVO vo){
+		System.out.println("===>  CartMapper cartListNormal() 호출");
+		return mybatis.selectList("cartMapper.cartListNormal", vo);
+	}
+	public List<ProductVO> cartListStar(ProductVO vo){
+		System.out.println("===>  CartMapper cartListStar() 호출");
+		return mybatis.selectList("cartMapper.cartListStar", vo);
 	}
 	
 	//장바구니 삭제 버튼으로 하나씩 삭제  

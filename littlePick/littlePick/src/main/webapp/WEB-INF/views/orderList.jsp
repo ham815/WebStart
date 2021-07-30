@@ -13,7 +13,7 @@
 	<div class="order_body">
 		<div class="order_title">
 			<h2>
-				<span class="section-intro__style">주문서</span>
+				<span class="section-intro__style">주문목록</span>
 			</h2>
 		</div>
 

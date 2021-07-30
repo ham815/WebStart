@@ -7,30 +7,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-	<!-- 주문 정보 입력 -->
-	<insert id="orderInsert" parameterType="productVO" >
-		INSERT INTO Order_tb      
-		VALUES (#{order_num}, #{user_num}, CURDATE(), 
-		#{total_account}, #{order_state}, #{order_address}, #{delivery_type}) 
+
+	
+	<!-- 주문 정보 -->
+	<insert id="insertOrderInfo">
+	 INSERT INTO Order_tb( order_num, user_num, order_date, total_account, order_state, order_address, delivery_type)   
+	 				VALUES(#{order_num}, #{user_num}, sysdate(), #{total_account}, #{order_state}, #{order_address},#{delivery_type})
 	</insert>
-	
-	<!-- 주문 목록 -->
-<!-- 	<select id="orderList" resultType="productVO" >
-		SELECT * FROM
-		
-	
-	</select> -->
-	
+	   
+	<!-- 주문 상세 정보 --> 
 
-	
-
-
-
-
-
-
-
-
+<!-- 	<insert id="orderInfoDetails">
+	 INSERT INTO OrderDetail_tb(orderDetail_num, order_num, product_num, product_count)
+	     SELECT orderDetailsNum, order_num, product_num, product_count
+	         FROM Cart_tb   
+	</insert>  -->
 	
 
 </mapper>

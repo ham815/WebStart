@@ -1,6 +1,7 @@
 package com.littlePick.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.littlePick.domain.ProductVO;
 
@@ -10,7 +11,9 @@ public interface CartService {
 	public void cartInsert(ProductVO vo);
 	
 	//장바구니 목록
-	public List<ProductVO> cartList(ProductVO vo);
+	public Map<String, Object> cartList(ProductVO vo);
+//	public List<ProductVO> cartListNormal(ProductVO vo);
+//	public List<ProductVO> cartListStar(ProductVO vo);
 	
 	//장바구니 삭제 버튼으로 하나씩 삭제  
 	public void cartDelete(int cart_num);

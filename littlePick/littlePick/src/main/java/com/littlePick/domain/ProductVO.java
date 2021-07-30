@@ -46,8 +46,14 @@ public class ProductVO {
 	private String order_address;
 	private String delivery_type; 
 	
-	//OrderList_tb
+	//OrderDetail_tb 변수
+	private int orderDetail_num;
+
+	//OrderList_tb	
 	public int order_count;
+	
+
+	
 	
 	
 
@@ -423,7 +429,7 @@ public class ProductVO {
 
 
 
-	public void setOder_address(String order_address) {
+	public void setOrder_address(String order_address) {
 		this.order_address = order_address;
 	}
 

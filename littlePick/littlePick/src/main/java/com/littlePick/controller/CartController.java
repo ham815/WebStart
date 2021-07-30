@@ -51,37 +51,20 @@ public class CartController {
 
 	// 장바구니 목록
 	@RequestMapping("cartList.do")
-	public ModelAndView cartList(HttpSession session, ModelAndView mv) {
+	public ModelAndView cartList(HttpSession session, ProductVO vo, ModelAndView mv) {
 		// session에 저장된 user_name
 		int user_num = (int) session.getAttribute("user_num");
-		Map<String, Object> map = new HashMap<String, Object>();
-		// 장바구니 정보
-		List<ProductVO> list = cartService.cartList(user_num);
-
-		// 장바구니 전체 금액 호출
-		int cartTotal = cartService.cartTotal(user_num);
+		vo.setUser_num(user_num);
 		
-		// 적립금 
-		double pointRatio = 0.05; //
-		int point = (int) (cartTotal*pointRatio);
-		
-
-		// 장바구니 전체 금액에 따라 배송비 구분
-		// 배송료 5만원 이상 무료, 미만 2500원
-		int fee = cartTotal > 50000 ? 0 : 2500;
-
-		map.put("list", list); // 장바구니 정보를 map에 저장
-		map.put("count", list.size()); // 장바구니 상품 유무
-		map.put("cartTotal", cartTotal); // 장바구니 전체 금액
-		map.put("fee", fee); // 배송비
-		map.put("point", point);   //적립금
-		map.put("allTotal", cartTotal + fee); // 장바구니 금액 + 배송비
+		Map<String, Object> map = cartService.cartList(vo);
+	
 		mv.setViewName("cartList"); // jsp 파일 이름
 		mv.addObject("map", map); // map 변수 저장
 		
 		return mv;
 
 	}
+
 
 	// 장바구니 삭제 버튼으로 하나씩 삭제
 	@RequestMapping(value = "cartDelete.do", method = RequestMethod.GET)
