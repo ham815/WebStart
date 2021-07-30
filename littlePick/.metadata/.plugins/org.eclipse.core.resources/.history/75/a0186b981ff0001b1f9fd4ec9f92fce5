@@ -1,0 +1,9 @@
+package com.littlePick.service;
+
+public class OrderServiceImple implements OrderService{
+	
+	public void order() {
+		
+	};
+
+}

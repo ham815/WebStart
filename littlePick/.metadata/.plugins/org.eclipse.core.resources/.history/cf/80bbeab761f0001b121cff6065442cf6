@@ -1,0 +1,14 @@
+package com.littlePick.service;
+
+import com.littlePick.domain.ProductVO;
+
+public interface OrderService {
+	
+	
+
+	//주문목록 추가 
+	public ProductVO insertOrder(List<ProductVO> normal_delivery);
+	
+	public ProductVO orderUpdate(ProductVO vo);
+
+}

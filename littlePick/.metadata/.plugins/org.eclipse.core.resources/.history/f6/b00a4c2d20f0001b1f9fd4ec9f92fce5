@@ -1,0 +1,7 @@
+package com.littlePick.dao;
+
+public class OrderDAO {
+	
+	public void order(ProductVO vo);
+
+}

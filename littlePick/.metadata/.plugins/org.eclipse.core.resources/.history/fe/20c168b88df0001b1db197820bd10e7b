@@ -1,0 +1,13 @@
+package com.littlePick.dao;
+
+import java.util.List;
+
+import com.littlePick.domain.ProductVO_team;
+
+public interface OrderDAO {
+	
+	public void insertOrder(ProductVO_team vo);
+	
+
+
+}

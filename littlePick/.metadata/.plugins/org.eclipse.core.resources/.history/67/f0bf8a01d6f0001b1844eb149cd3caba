@@ -1,0 +1,97 @@
+package com.littlePick.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.littlePick.domain.ProductVO;
+import com.littlePick.service.CartserviceImple;
+import com.littlePick.service.OrderServiceImple;
+
+
+@Controller
+public class OrderController {
+	
+
+	@Autowired
+	CartserviceImple cartService;
+	
+	//주문 페이지 
+	@RequestMapping("order.do")
+	public ModelAndView order(HttpSession session, ModelAndView mv) {		
+		// session에 저장된 user_name 불러오기 
+		int user_num = (int) session.getAttribute("user_num");
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 장바구니 정보
+		List<ProductVO> list = cartService.cartList(user_num);
+		// 장바구니 전체 금액 호출
+		int cartTotal = cartService.cartTotal(user_num);
+		
+		// 장바구니 전체 금액에 따라 배송비 구분
+		// 배송료 5만원 이상 무료, 미만 2500원
+		int fee = cartTotal > 50000 ? 0 : 2500;
+		
+		map.put("list",list); 					//장바구니 정보를 map에 저장
+		map.put("cartTotal", cartTotal); 		// 장바구니 전체 금액
+		map.put("fee", fee); 					// 배송비
+		map.put("total_account", cartTotal + fee); 	// 장바구니 금액 + 배송비
+				
+		mv.setViewName("order"); // jsp 파일 이름
+		mv.addObject("map", map); // map 변수 저장
+		
+		return mv;
+	}
+	
+	@Autowired
+	OrderServiceImple orderService;
+	
+	//주문 목록 페이지 
+	@RequestMapping("insertOrder.do")
+	public ModelAndView insertOrder(HttpSession session, ProductVO vo, ModelAndView mv) {
+		// session에 저장된 user_name 불러오기 
+		int user_num = (int)session.getAttribute("user_num");
+		vo.setUser_num(user_num);
+		
+		//장바구니 목록 불러오기 
+		List<ProductVO> list = cartService.cartList(vo);
+		int count = list.size();
+		
+		//배송유형 나눠서  DB에 저장 
+		
+		for(int i=0; i<count; i++) {
+			//delivery_num이 1이면 일반 배송
+			if (list.get(i).getDelivery_num() == 1) {
+				int delivery_num = 1; 
+				list.get(i).setDelivery_type("일반배송");
+				List<ProductVO> normal_delivery = cartService.cartList(vo);
+				orderService.insertOrder(normal_delivery.get(i));
+			}
+			//아니면 샛별배송
+			else { 
+				list.get(i).setDelivery_type("샛별배송");
+				int delivery_num = 3; 
+				List<ProductVO> star_delivery = cartService.cartList(vo);
+				orderService.insertOrder(star_delivery.get(i));
+			}
+		}
+		
+		//장바구니 삭제
+		cartService.cartAllDelete();
+		
+		mv.setViewName("orderList");
+//		mv.addObject("order", ll);
+		
+		return mv;
+
+	}
+	
+
+}

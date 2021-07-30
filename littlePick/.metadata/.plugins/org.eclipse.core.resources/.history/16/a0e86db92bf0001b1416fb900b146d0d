@@ -1,0 +1,9 @@
+package com.littlePick.dao;
+
+import com.littlePick.domain.ProductVO;
+
+public interface OrderDAO {
+	
+	public ProductVO order(ProductVO vo);
+
+}

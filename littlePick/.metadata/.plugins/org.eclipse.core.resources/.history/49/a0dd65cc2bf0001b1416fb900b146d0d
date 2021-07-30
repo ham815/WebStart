@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderMapper">
+
+
+
+	<!-- 주문 -->
+	<select id="orderInfo" resultType="product" >
+		SELECT
+			c.cart_num AS cart_num,
+			c.user_num AS user_num,
+			c.product_count AS product_count,
+			m.user_name AS user_name,
+			p.product_num AS product_num,
+			p.product_image AS product_image,
+			p.product_name AS product_name,
+			p.sale_price AS sale_price,
+			p.delivery_num AS delivery_num,
+			sale_price*c.product_count AS single_price
+		FROM
+			Member_tb m, Product_tb p, Cart_tb c
+		WHERE m.user_num=c.user_num
+			AND p.product_num = c.product_num
+			AND c.user_num = #{user_num}
+		ORDER BY
+			c.cart_num			
+	</select>
+
+</mapper>

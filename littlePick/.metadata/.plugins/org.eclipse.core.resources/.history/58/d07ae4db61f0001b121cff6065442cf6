@@ -1,0 +1,19 @@
+package com.littlePick.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.littlePick.dao.OrderDAOImple;
+import com.littlePick.domain.ProductVO;
+
+@Service
+public class OrderServiceImple implements OrderService{
+	
+//	@Autowired
+//	OrderDAOImple orderDAO;
+//	
+//	public ProductVO order(ProductVO vo) {
+//		return orderDAO.order(vo);
+//	};
+
+}

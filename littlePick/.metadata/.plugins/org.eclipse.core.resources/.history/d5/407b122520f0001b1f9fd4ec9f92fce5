@@ -1,0 +1,5 @@
+package com.littlePick.dao;
+
+public class OrderDAO {
+
+}

@@ -1,0 +1,23 @@
+package com.littlePick.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.littlePick.domain.ProductVO_team;
+
+@Repository
+public class OrderDAOImple implements OrderDAO{
+	
+	@Autowired
+	private SqlSessionTemplate mybatis;
+	
+	public void insertOrder(ProductVO_team vo) {
+		System.out.println("===> orderMapper orderInsert() 호출");
+		mybatis.insert("orderMapper.orderInsert",vo);
+	}
+
+
+}

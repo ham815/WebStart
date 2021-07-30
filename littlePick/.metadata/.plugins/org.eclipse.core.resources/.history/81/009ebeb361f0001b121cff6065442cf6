@@ -1,0 +1,13 @@
+package com.littlePick.service;
+
+import com.littlePick.domain.ProductVO;
+
+public interface OrderService {
+	
+	public ProductVO orderCount(ProductVO vo);
+	
+	public ProductVO orderInsert(ProductVO vo);
+	
+	public ProductVO orderUpdate(ProductVO vo);
+
+}

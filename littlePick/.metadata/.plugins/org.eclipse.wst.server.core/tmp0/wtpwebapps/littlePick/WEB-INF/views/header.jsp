@@ -23,9 +23,11 @@
 	<header class="header_area">
 		<div class="top_menu_container">
 			<ul class="top_menu_list">
-				<li class="top_menu_item"><a class="top_menu_anchor" href="register.do">회원가입</a></li>
-				<li class="top_menu_item"><a class="top_menu_anchor" href="userLogin.do">로그인</a></li>
-				<li class="top_menu_item"><a class="top_menu_anchor" href="#">고객센터</a></li>		
+				<li class="top_menu_item"><a class="top_menu_anchor" href="mypage_board.do">마이페이지</a></li>
+				<li class="top_menu_item"><a class="top_menu_anchor" href="1_logout.do">로그아웃</a></li>
+				<li class="top_menu_item"><a class="top_menu_anchor" href="#">고객센터</a>
+				</li>		
+			</ul>		
 			</ul>
 		</div>
 		<div class="main_menu">
@@ -56,9 +58,10 @@
 							<li class="nav-item submenu dropdown"><a class="nav-link" href="#">신상품</a></li>
 							<li class="nav-item submenu dropdown"><a class="nav-link" href="#">베스트</a></li>
 							<li class="nav-item submenu dropdown"><a class="nav-link" href="#">특가/혜택</a></li>
-							<li class="nav-item submenu dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false" href="community.do">커뮤니티</a>
+							<li class="nav-item submenu dropdown"><a class="nav-link" href="community.do" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">커뮤니티</a>
 								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="community.do">전체 </a></li>
 									<li class="nav-item"><a class="nav-link" href="community_board1.do">요리 </a></li>
 									<li class="nav-item"><a class="nav-link" href="community_board2.do">생활</a></li>
 									<li class="nav-item"><a class="nav-link" href="community_board3.do">건강</a></li>

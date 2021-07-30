@@ -1,0 +1,12 @@
+package com.littlePick.dao;
+
+import org.springframework.stereotype.Repository;
+
+import com.littlePick.domain.ProductVO;
+
+@Repository
+public class OrderDAOImple implements OrderDAO{
+	
+	public void order(ProductVO vo);
+
+}

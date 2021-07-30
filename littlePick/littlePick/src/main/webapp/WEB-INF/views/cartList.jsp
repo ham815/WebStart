@@ -162,7 +162,7 @@
                               <td></td>
                               <td></td>
                               <td ><h5>적립금</h5></td>
-                              <td class="price_align"><h5>0원</h5></td>
+                              <td class="price_align"><h5>${map.point}원</h5></td>
                               <td></td>
                           </tr>
                           <tr>

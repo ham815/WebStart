@@ -1,0 +1,7 @@
+package com.littlePick.service;
+
+public interface orderService {
+	
+	public void order();
+
+}

@@ -1,0 +1,14 @@
+package com.littlePick.service;
+
+import org.springframework.stereotype.Service;
+
+import com.littlePick.domain.ProductVO;
+
+@Service
+public class OrderServiceImple implements OrderService{
+	
+	public void order(ProductVO vo) {
+		
+	};
+
+}
