@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 장바구니 추가 -->
 	<insert id="cartInsert">
 		INSERT INTO Cart_tb
-		VALUES (#{cart_num}, #{user_num}, #{product_num}, #{product_count})
+		VALUES (#{cart_num}, #{user_num}, #{product_num}, #{product_count},#{delivery_num})
 		
 	</insert>
 

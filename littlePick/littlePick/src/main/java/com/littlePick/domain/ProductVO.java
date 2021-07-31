@@ -52,14 +52,11 @@ public class ProductVO {
 	//OrderList_tb	
 	public int order_count;
 	
-
-	
-	
-	
-
 	//추가 생성 변수 ===============
 	//장바구니 상품별 합계 : sale_price*product_count
 	private int single_price;
+	//주문목록 주문번호별 상품 종류 개수
+	private int orderList_count;
 
 
 
@@ -467,6 +464,30 @@ public class ProductVO {
 
 	public void setSingle_price(int single_price) {
 		this.single_price = single_price;
+	}
+
+
+
+	public int getOrderDetail_num() {
+		return orderDetail_num;
+	}
+
+
+
+	public void setOrderDetail_num(int orderDetail_num) {
+		this.orderDetail_num = orderDetail_num;
+	}
+
+
+
+	public int getOrderList_count() {
+		return orderList_count;
+	}
+
+
+
+	public void setOrderList_count(int orderList_count) {
+		this.orderList_count = orderList_count;
 	}
 
 

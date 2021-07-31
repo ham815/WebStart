@@ -33,7 +33,11 @@ public class CartserviceImple implements CartService {
 		// 배송 유형별 장바구니 리스트 
 		List<ProductVO> listNormal = cartDAO.cartListNormal(vo);
 		List<ProductVO> listStar = cartDAO.cartListStar(vo);
-		
+		/*
+		 * System.out.println("배송번호"+listNormal.get(0).getDelivery_num());
+		 * System.out.println("배송번호"+listStar.get(0).getDelivery_num());
+		 * System.out.println("배송번호"+listStar.get(1).getDelivery_num());
+		 */
 		// 주문자 정보 추출
 		String user_name; 
 		String user_phone; 
@@ -48,11 +52,17 @@ public class CartserviceImple implements CartService {
 			 user_email=listNormal.get(0).getUser_email();
 			 user_address=listNormal.get(0).getUser_address();
 		}
+		else if(listStar.size()!=0){
+			 user_name=listStar.get(0).getUser_name();
+			 user_phone=listStar.get(0).getUser_phone();
+			 user_email=listStar.get(0).getUser_email();
+			 user_address=listStar.get(0).getUser_address();
+		}
 		else {
-			 user_name=listStar.get(1).getUser_name();
-			 user_phone=listStar.get(1).getUser_phone();
-			 user_email=listStar.get(1).getUser_email();
-			 user_address=listStar.get(1).getUser_address();
+			user_name=null;
+			user_phone=null;
+			user_email=null;
+			user_address=null;
 		}
 
 		

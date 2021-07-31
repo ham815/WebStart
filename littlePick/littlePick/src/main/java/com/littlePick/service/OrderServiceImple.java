@@ -15,14 +15,25 @@ public class OrderServiceImple implements OrderService{
 	OrderDAOImple orderDAO;
 	
 	public void insertOrderInfo(ProductVO vo) {
-		System.out.println("===> orderMapper insertOrderInfo() 호출");
+		System.out.println("===> orderDAO insertOrderInfo() 호출");
 		orderDAO.insertOrderInfo(vo);
 	}
 	
-//	public void orderInfoDetails(ProductVO vo) {
-//		System.out.println("===> orderMapper orderInfoDetails() 호출");
-//		orderDAO.orderInfoDetails(vo);
-//	}
+	public void insertOrderList(ProductVO vo) {
+		System.out.println("===> orderDAO insertOrderList() 호출");
+		orderDAO.insertOrderList(vo);
+	}
+	
+	//주문 목록 조회
+	public List<ProductVO> orderList(ProductVO vo){
+		System.out.println("===> orderDAO orderList() 호출");
+		return orderDAO.orderList(vo);
+	}
+	//주문 상세 
+	public List<ProductVO> orderDetail(ProductVO vo) {
+		System.out.println("===> orderDAO orderDetail() 호출");
+		return orderDAO.orderDetail(vo);
+	}
 
 
 }

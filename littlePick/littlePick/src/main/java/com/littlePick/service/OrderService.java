@@ -9,7 +9,11 @@ public interface OrderService {
 	//주문 정보 추가
 	public void insertOrderInfo(ProductVO vo);
 	//주문 상세 정보 추가
-//	public void orderInfoDetails(ProductVO vo);
+	public void insertOrderList(ProductVO vo);
+	//주문 목록 조회
+	public List<ProductVO> orderList(ProductVO vo); 
+	//주문 상세 
+	public List<ProductVO> orderDetail(ProductVO vo);
 	
 
 }
