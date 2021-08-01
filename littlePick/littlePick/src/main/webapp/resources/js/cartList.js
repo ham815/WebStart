@@ -22,29 +22,38 @@ $(function(){
 	});
 	
 	
-	  //수량 변화에 따른 총합계 금액 계산 
-	  $(".product_count button").click(function(){
-		 
-		  let quantity=$("#sst").val();
-		  let total = $("#price").text() * quantity;
-		  $("#product_total").text(total);  	  
-	  })
+	//	$(".increase.cart-count").click(function(){
+	//	var result = $(this).parents().find("#sst").val();
+	//	alert(result);
+	//})
+	
 	  
 	  //수량 증가버튼
 	  $(".increase.cart-count").click(function(){
-		  var result = document.getElementById('sst'); 
-		  var sst = result.value; 
-		  if( !isNaN( sst )) 
-			  result.value++;
-		  return false;
+		  var input = document.getElementById('sst'); 
+		  var quantity = input.value*1;
+		  if( !isNaN( quantity )) {
+			  quantity += 1;
+			  var price = $("#price").text() * quantity;
+			  $("#product_total").text(price); 
+			  input.value++;
+			  //return false;
+		  }
 	  })
+	
+	
 	  //수량 감소버튼
 	  $(".reduced.cart-count").click(function(){
-		  var result = document.getElementById('sst'); 
-		  var sst = result.value; 
-		  if( !isNaN( sst ) && sst > 0 ) 
-			  result.value--;
-		  return false;
+		  var input = document.getElementById('sst'); 
+		  var quantity = input.value*1;	
+		  //input박스 수량 감소
+		  if( !isNaN( quantity ) && quantity > 1 ) {
+			  quantity -= 1;
+			  var price = $("#price").text() * quantity;
+			  $("#product_total").text(price); 
+			  input.value--;
+			  //return false;  
+		  }
 	  })
 });
 

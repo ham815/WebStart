@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;littlePick/src/main/webapp/resources/js/orderl.js&apos; to &apos;order.js&apos;" description="Rename resource &apos;orderl.js&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/resources/js/orderl.js" name="order.js" stamp="1627819085773" updateReferences="true"/>
+</session>

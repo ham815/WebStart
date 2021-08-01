@@ -71,6 +71,13 @@ public class OrderController {
 		vo.setOrder_state("결제 완료");
 		vo.setTotal_account((int)map.get("total_account"));
 		
+		//포인트 적립
+		vo.setUser_point((int)map.get("point"));
+		orderService.updatePoint(vo);
+		
+
+
+		//일반배송 리스트 확인 및 주문 정보 입력 
 		if(listNormal != null) {
 			//주문번호 : 회원번호 + 배송타입 + 주문날짜시간
 //			int order_num = Integer.parseInt(user_num+listNormal.get(0).getDelivery_num()+nowDateTime);
@@ -80,8 +87,14 @@ public class OrderController {
 			System.out.println("=====================일반배송 리스트 호출");
 			orderService.insertOrderInfo(vo);
 			orderService.insertOrderList(vo);
+			for (int i=0; i<listNormal.size(); i++) {
+				//재고 수량 변경 
+				orderService.updateStock(listNormal.get(i));	
+			}
+
 		}
 		
+		//샛별배송 리스트 확인 및 주문 정보 입력 
 		if(listStar != null) {
 			//주문번호 : 회원번호 + 배송타입 + 주문날짜시간
 //			int order_num = Integer.parseInt(user_num+listStar.get(0).getDelivery_num()+nowDateTime);
@@ -92,6 +105,12 @@ public class OrderController {
 			System.out.println("======================샛별배송 리스트 호출");
 			orderService.insertOrderInfo(vo);
 			orderService.insertOrderList(vo);
+			for (int i=0; i<listStar.size(); i++) {
+				//재고 수량 변경 
+				orderService.updateStock(listStar.get(i));	
+			}
+			
+
 		}
 		
 		//장바구니 삭제
@@ -124,6 +143,7 @@ public class OrderController {
 	public Model orderDetail(HttpSession session, HttpServletRequest request,ProductVO vo, Model m) {
 		//session에 저장된 user_name
 		int user_num = (int) session.getAttribute("user_num");
+		//parameter 형변환
 		int order_num =Integer.parseInt(request.getParameter("order_num"));
 		
 		vo.setUser_num(user_num);

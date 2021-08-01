@@ -14,6 +14,10 @@ public interface OrderService {
 	public List<ProductVO> orderList(ProductVO vo); 
 	//주문 상세 
 	public List<ProductVO> orderDetail(ProductVO vo);
+	//포인트 적립
+	public void updatePoint(ProductVO vo);
+	//재고 수량 업데이트 
+	public void updateStock(ProductVO vo); 
 	
 
 }

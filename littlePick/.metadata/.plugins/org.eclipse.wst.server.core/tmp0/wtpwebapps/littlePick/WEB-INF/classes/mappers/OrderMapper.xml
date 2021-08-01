@@ -59,5 +59,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND o.product_num=p.product_num
 	</select>
 	
+	<!-- 포인트적립 -->
+	<update id="updatePoint">
+	UPDATE Member_tb 
+	SET  user_point=user_point + #{user_point}
+	WHERE user_num=#{user_num}
+	</update>
+	
+	<update id="updateStock">
+	UPDATE Product_tb 
+	SET  stock=stock-#{product_count}
+	WHERE product_num=#{product_num}	
+	</update>
+	
 
 </mapper>

@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td>배송지</td>
-					<td id="order_address" colspan="3">${map.user_address}</td>
+					<td id="order_address" colspan="3">${map.user_address} ${map.user_address2} ${map.user_address3}</td>
 				</tr>
 				<tr></tr>
 
@@ -139,7 +139,8 @@
 							<a href="cartList.do">취소하기</a>
 						</div>
 						<div class="blue-btn">
-							<a href="insertOrder.do">결제하기</a>
+							<!-- js 클릭이벤트 : 결제 방법 선택  -->
+							<a id="payfor" >결제하기</a> 
 						</div>
 					</td>
 				</tr>
@@ -150,5 +151,6 @@
       </div>
   </section>
 	<%@ include file="footer.jsp"%>
+	<script src="resources/js/order.js"></script>
 </body>
 </html>

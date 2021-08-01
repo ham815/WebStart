@@ -42,7 +42,9 @@ public class CartserviceImple implements CartService {
 		String user_name; 
 		String user_phone; 
 		String user_email; 
-		String user_address;	
+		String user_address;
+		String user_address2;
+		String user_address3;
 //		System.out.println("일반배송 사이즈"+listNormal.size());
 //		System.out.println("샛별배송 사이즈"+listStar.size());
 
@@ -51,18 +53,24 @@ public class CartserviceImple implements CartService {
 			 user_phone=listNormal.get(0).getUser_phone();
 			 user_email=listNormal.get(0).getUser_email();
 			 user_address=listNormal.get(0).getUser_address();
+			 user_address2=listNormal.get(0).getUser_address2();
+			 user_address3=listNormal.get(0).getUser_address3();
 		}
 		else if(listStar.size()!=0){
 			 user_name=listStar.get(0).getUser_name();
 			 user_phone=listStar.get(0).getUser_phone();
 			 user_email=listStar.get(0).getUser_email();
 			 user_address=listStar.get(0).getUser_address();
+			 user_address2=listStar.get(0).getUser_address2();
+			 user_address3=listStar.get(0).getUser_address3();
 		}
 		else {
 			user_name=null;
 			user_phone=null;
 			user_email=null;
 			user_address=null;
+			user_address2=null;
+			user_address3=null;
 		}
 
 		
@@ -95,6 +103,8 @@ public class CartserviceImple implements CartService {
 		map.put("user_phone",user_phone);
 		map.put("user_email",user_email);
 		map.put("user_address",user_address);
+		map.put("user_address2",user_address2);
+		map.put("user_address3",user_address3);
 		
 		return map;
 	}

@@ -34,6 +34,18 @@ public class OrderDAOImple implements OrderDAO{
 		System.out.println("===> orderMapper orderDetail() 호출");
 		return mybatis.selectList("orderMapper.orderDetail",vo);
 	}
+	
+	//포인트 적립
+	public void updatePoint(ProductVO vo) {
+		System.out.println("===> orderMapper updatePoint() 호출");
+		mybatis.update("orderMapper.updatePoint",vo);
+	}
+	
+	//재고 수량 업데이트 
+	public void updateStock(ProductVO vo) {
+		System.out.println("===> orderMapper updateStock() 호출");
+		mybatis.update("orderMapper.updateStock", vo);
+	}
 
 
 }

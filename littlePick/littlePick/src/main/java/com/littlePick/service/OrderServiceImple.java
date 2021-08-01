@@ -34,6 +34,16 @@ public class OrderServiceImple implements OrderService{
 		System.out.println("===> orderDAO orderDetail() 호출");
 		return orderDAO.orderDetail(vo);
 	}
+	
+	//포인트 적립
+	public void updatePoint(ProductVO vo) {
+		orderDAO.updatePoint(vo);
+	}
+	
+	//재고 수량 업데이트 
+	public void updateStock(ProductVO vo) {
+		orderDAO.updateStock(vo);
+	}
 
 
 }
