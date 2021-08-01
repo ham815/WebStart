@@ -24,6 +24,7 @@
 						<th width="100">주문번호</th>
 						<th width="200">주문일</th>
 						<th>주문내역</th>
+						<th width="100">배송타입</th>
 						<th width="100">주문금액</th>
 					</tr>
 					<c:forEach items="${list }" var="o">
@@ -36,6 +37,7 @@
 									<c:if test="${o.orderList_count!=1}">  외 ${o.orderList_count-1}건</c:if> 
 								</a>
 							</td>
+							<td>${o.delivery_type}</td>
 							<td class="price_align" >${o.now_price }원</td>
 						</tr>
 					</c:forEach>

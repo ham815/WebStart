@@ -115,10 +115,8 @@
                                       <input type="text" name="product_count" id="sst" maxlength="12" value="${s.product_count}" title="Quantity:"
                                           class="input-text qty" style="width:10">
                                        <div class="cart_qty_btn">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
+                                      <button class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
+                                      <button class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
                                        </div>
                                   </div>
                               </td>

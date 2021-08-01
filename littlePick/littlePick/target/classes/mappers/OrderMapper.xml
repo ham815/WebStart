@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        p.product_name AS product_name, 
 	        count(ol.order_num) AS orderList_count,
 	        o.order_date AS order_date,
+	        o.delivery_type AS delivery_type,
 	        ol.now_price AS now_price
 	FROM OrderList_tb ol, Order_tb o, Product_tb p
 	WHERE ol.user_num=#{user_num} 
