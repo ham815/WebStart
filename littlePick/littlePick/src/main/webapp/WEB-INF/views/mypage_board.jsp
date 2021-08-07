@@ -23,7 +23,8 @@
 <!-- ================ 상단 ================= -->
 <!-- 헤더 인클루드 -->
 <%@ include file="header.jsp"%> 
-
+  <section>
+      <div class="container">
 <div class="mypage-menu">
 <nav class="navbar navbar-expand-lg">
 		<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
@@ -65,7 +66,7 @@
 	
 	<div class="mypage-right">
 	<div class="sub-name">
-	<h3>게시글</h3>
+	<h3>게시물</h3>
 	</div>
 	
 	 <div class="row">
@@ -87,6 +88,7 @@
 			
 			</c:forEach>
 	</div> 
+	<hr/>
 	<div class="sub-name">		
 	<h3>댓글</h3>
 	</div>
@@ -136,5 +138,7 @@
   <script src="resources/vendors/mail-script.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   <script src="resources/js/main.js"></script>
+  </div>
+  </section>
 </body>
 </html>

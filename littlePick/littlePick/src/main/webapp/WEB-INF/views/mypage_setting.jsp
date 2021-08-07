@@ -17,14 +17,33 @@
 <link rel="stylesheet" href="resources/vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="resources/css/style_0joo.css">
-
 </head>
+<script>
+
+ 	window.onload = function() {
+		document.getElementById('Submit').onclick = check;
+	} 
+
+	function check() {
+
+		if (document.form.user_password.value == "") {
+			alert("비밀번호를 입력하세요.")
+			document.form.user_password.focus();
+			return false;
+		}
+
+		document.form.submit();//전송
+	}
+	
+	
+</script>
 <body>
 
 <!-- ================ 상단 ================= -->
 <!-- 헤더 인클루드 -->
 <%@ include file="header.jsp"%> 
-
+  <section>
+      <div class="container">
 <div class="mypage-menu">
 <nav class="navbar navbar-expand-lg">
 		<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
@@ -66,35 +85,16 @@
 	
 	<div class="mypage-right">
 	
-	<form method="get" action="mypage_setting_save.do">
+	<form method="post" action="mypage_setting_check.do" name="form">
 	<table class="mypage-table" >
+	<h5>회원 정보를 수정하려면 비밀번호를 입력하세요.</h5>
 	<tr>
-	<td>이름</td><td><input type="text" name="user_name" value="${user.user_name}" readonly /></td>
-	</tr>
-	<tr>
-	<td>이메일</td><td><input type="text" name="user_email" value="${user.user_email}" readonly /></td>
-	</tr>
-	<tr>
-	<td>닉네임</td><td><input type="text" name="user_nickname" value="${user.user_nickname}" /></td>
-	</tr>
-	<tr>
-	<td>비밀번호</td><td><input type="text" name="user_password" placeholder="비밀번호를 입력하세요"/></td>
-	</tr>
-	<tr>
-	<td>휴대폰번호</td><td><input type="text" name="user_phone" value="${user.user_phone}"/><td>
-	</tr>
-	<tr>
-	<td>주소</td><td><input type="text" name="user_address" value="${user.user_address}"/></td>
-	</tr>
-	<tr>
-	<td>생년월일</td><td><input type="text" name="user_birth" value="${user.user_birth}"/></td>
-	</tr>
-	<tr>
-	<td>프로필사진</td><td><input type="file" name="userImgFile" id="user_image"/></td>
+	<td>비밀번호</td>
+	<td><input type="password" name="user_password" id="user_password" placeholder="비밀번호를 입력하세요"/></td>
 	</tr>
 	</table>
 	<div class="board-input-button">
-		<input type="submit" class="button" value="수정하기"/>
+		<input type="button" name="Submit" id="Submit" class="button" value="입력"/>
 	</div>
 	</form>
 	
@@ -119,5 +119,7 @@
   <script src="resources/vendors/mail-script.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   <script src="resources/js/main.js"></script>
+  </div>
+  </section>
 </body>
 </html>

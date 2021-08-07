@@ -23,7 +23,8 @@
 <!-- ================ 상단 ================= -->
 <!-- 헤더 인클루드 -->
 <%@ include file="header.jsp"%> 
-
+  <section>
+      <div class="container">
 <div class="mypage-menu">
 <nav class="navbar navbar-expand-lg">
 		<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
@@ -74,16 +75,17 @@
 
 				<div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
 					<div class="categories_post">
-						<a href="#####.do?product_num=${review.product_num}"> <img
+						<a href="product.do?product_num=${review.product_num}"> <img
 							src="resources/upload/review/${review.review_image}" width="200px"
 							height="200px">
 						</a>
-						${review.review_content}
+						
 						<div class="blog_info">
-							<a href="#####.do?product_num=${review.product_num}">
+							<a href="product.do?product_num=${review.product_num}">
 								<h5>${review.product_name}</h5>
 							</a>
 						</div>
+						
 					</div>
 				</div>
 			
@@ -111,5 +113,7 @@
   <script src="resources/vendors/mail-script.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   <script src="resources/js/main.js"></script>
+  </div>
+  </section>
 </body>
 </html>

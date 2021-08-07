@@ -74,54 +74,77 @@ public class OrderController {
 		//포인트 적립
 		vo.setUser_point((int)map.get("point"));
 		orderService.updatePoint(vo);
-		
 
 
 		//일반배송 리스트 확인 및 주문 정보 입력 
-		if(listNormal != null) {
-			//주문번호 : 회원번호 + 배송타입 + 주문날짜시간
-//			int order_num = Integer.parseInt(user_num+listNormal.get(0).getDelivery_num()+nowDateTime);
-			vo.setDelivery_num(1);			
-			vo.setDelivery_type("일반배송");
-			vo.setOrder_address(listNormal.get(0).getUser_address());
-			System.out.println("=====================일반배송 리스트 호출");
-			orderService.insertOrderInfo(vo);
-			orderService.insertOrderList(vo);
-			for (int i=0; i<listNormal.size(); i++) {
-				//재고 수량 변경 
-				orderService.updateStock(listNormal.get(i));	
-			}
-
+		//일반배송리스트 샛별배송리스트가 둘다 비어있지 않으면 
+		if(listNormal.size()>0 && listStar.size()>0) {
+			//System.out.println("1");
+			insertNormalList(listNormal, vo);
+			insertStarList(listStar, vo);
+		}  
+		//일반배송 리스트는 있고, 샛별배송은 비어있으면 
+		else if (listNormal.size()>0 && listStar.size()==0) {
+			//System.out.println("2");
+			//일반배송만 추가 
+			insertNormalList(listNormal, vo);
 		}
-		
-		//샛별배송 리스트 확인 및 주문 정보 입력 
-		if(listStar != null) {
-			//주문번호 : 회원번호 + 배송타입 + 주문날짜시간
-//			int order_num = Integer.parseInt(user_num+listStar.get(0).getDelivery_num()+nowDateTime);
-//			vo.setOrder_num(order_num);
-			vo.setDelivery_num(3);
-			vo.setDelivery_type("샛별배송");
-			vo.setOrder_address(listStar.get(0).getUser_address());
-			System.out.println("======================샛별배송 리스트 호출");
-			orderService.insertOrderInfo(vo);
-			orderService.insertOrderList(vo);
-			for (int i=0; i<listStar.size(); i++) {
-				//재고 수량 변경 
-				orderService.updateStock(listStar.get(i));	
-			}
-			
-
+		//일반배송이 비어있고, 샛별배송리스트만 있으면 
+		else if (listNormal.size()==0 && listStar.size()>0) {
+			//System.out.println("3");
+			//샛별배송 추가
+			insertStarList(listStar, vo);
 		}
+		else {
+			//System.out.println("4");
+			return "redirect:cartList.do";
+		}
+
 		
 		//장바구니 삭제
-		//cartService.cartAllDelete(user_num);
+		cartService.cartAllDelete(user_num);
 		
 //		mv.setViewName("orderList");
 //		mv.addObject("order", ll);
 		
-		return "redirect:orderList.do";
+		return "redirect:mypage_order.do";
 
 	}
+	
+	public void insertNormalList(List<ProductVO> listNormal, ProductVO vo) {
+		//주문번호 : 회원번호 + 배송타입 + 주문날짜시간
+//		int order_num = Integer.parseInt(user_num+listNormal.get(0).getDelivery_num()+nowDateTime);
+		vo.setDelivery_num(1);			
+		vo.setDelivery_type("일반배송");
+		vo.setOrder_address(listNormal.get(0).getUser_address());
+		System.out.println("=====================일반배송 리스트 호출");
+		orderService.insertOrderInfo(vo);
+		orderService.insertOrderList(vo);
+		for (int i=0; i<listNormal.size(); i++) {
+			//재고 수량 변경 
+			orderService.updateStock(listNormal.get(i));	
+		}
+	}
+	
+	public void insertStarList(List<ProductVO> listStar, ProductVO vo) {
+		//주문번호 : 회원번호 + 배송타입 + 주문날짜시간
+//		int order_num = Integer.parseInt(user_num+listStar.get(0).getDelivery_num()+nowDateTime);
+//		vo.setOrder_num(order_num);
+		vo.setDelivery_num(3);
+		vo.setDelivery_type("샛별배송");
+		vo.setOrder_address(listStar.get(0).getUser_address());
+		System.out.println("======================샛별배송 리스트 호출");
+		orderService.insertOrderInfo(vo);
+		orderService.insertOrderList(vo);
+		for (int i=0; i<listStar.size(); i++) {
+			//재고 수량 변경 
+			orderService.updateStock(listStar.get(i));	
+		}
+	}
+	
+	
+	
+	
 	
 	//주문 목록 
 	@RequestMapping("orderList.do")

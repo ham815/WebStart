@@ -19,12 +19,15 @@
 
 </head>
 <body>
-
+  <section>
+      <div class="container">
 <%@ include file="header.jsp" %>
 
  <!--================Cart Area =================-->
- 
- <a href="orderList.do">주문목록</a>
+ <ul class="top_menu_list">
+		<!-- <li class="top_menu_item"><a class="top_menu_anchor" href="orderList.do">주문목록</a></li> -->
+			</ul>		
+<!--  <a href="orderList.do">주문목록</a> -->
   <section class="cart_area">
       <div class="container">
           <div class="cart_inner">
@@ -70,11 +73,13 @@
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${n.product_count}" title="Quantity:"
-                                          class="input-text qty" style="width:10">
+                                  		<div>
+	                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${n.product_count}" title="Quantity:"
+	                                          class="input-text qty" style="width:10">
+                                       </div>
                                        <div class="cart_qty_btn">
-                                      <button class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
-                                      <button class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
+	                                      <button class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
+	                                      <button class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
                                        </div>
                                   </div>
                               </td>
@@ -108,12 +113,14 @@
                                   </div>
                               </td>
                               <td class="price_align">
-                                  <h5>${s.sale_price}원</h5>
+                                  <h5><span id="price">${s.sale_price}</span>원</h5>
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${s.product_count}" title="Quantity:"
-                                          class="input-text qty" style="width:10">
+                                  		<div>
+	                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${s.product_count}" title="Quantity:"
+	                                          class="input-text qty" style="width:10">
+                                       </div>
                                        <div class="cart_qty_btn">
                                       <button class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
                                       <button class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
@@ -121,7 +128,7 @@
                                   </div>
                               </td>
                               <td class="price_align">
-                                  <h5>${s.single_price}원</h5>
+                                  <h5><span id="product_total">${s.single_price}</span>원</h5>
                               </td>
                               <td><a href="cartDelete.do?cart_num=${s.cart_num}"><i class="fas fa-times"></i></a></td>
                           </tr>
@@ -143,7 +150,7 @@
                          	 <td></td>
                          	 <td></td>
                               <td ><h5>상품금액</h5></td>
-                              <td class="price_align"><h5>${map.cartTotal }원</h5></td>
+                              <td class="price_align"><h5><span id="cartTotal">${map.cartTotal }</span>원</h5></td>
                               <td></td>  
                           </tr>
                            <tr>
@@ -187,7 +194,7 @@
                                       <a href="main.do">쇼핑계속하기</a>
                                   </div>
                                   <div class="blue-btn">
-                                      <a href="order.do">주문하기</a>
+                                      <a id="order-btn">주문하기</a>
                                   </div>
                                </td>
                               <td></td>
@@ -217,7 +224,8 @@
 	<script src="resources/js/main.js"></script>
 	<script src="resources/js/cartList.js"></script>
 	
-	
+	</div>
+	</section>
 
 
 

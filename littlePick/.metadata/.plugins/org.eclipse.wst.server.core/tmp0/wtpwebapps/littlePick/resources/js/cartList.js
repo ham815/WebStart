@@ -13,7 +13,7 @@ $(function(){
 	});
 	
 	$("input[name='all_check']").click(function(){
-		if($("input[name='item_check':checked]").lenth == rowCnt){
+		if($("input[name='item_check':checked]").length == rowCnt){
 			$("input[name='item_check']")[0].checked=true;
 		}
 		else{
@@ -21,15 +21,10 @@ $(function(){
 		}
 	});
 	
+
 	
-	//	$(".increase.cart-count").click(function(){
-	//	var result = $(this).parents().find("#sst").val();
-	//	alert(result);
-	//})
-	
-	  
-	  //수량 증가버튼
-	  $(".increase.cart-count").click(function(){
+	//수량 증가버튼 
+	  $(document).on("click",".increase.cart-count", function(){
 		  var input = document.getElementById('sst'); 
 		  var quantity = input.value*1;
 		  if( !isNaN( quantity )) {
@@ -40,10 +35,8 @@ $(function(){
 			  //return false;
 		  }
 	  })
-	
-	
-	  //수량 감소버튼
-	  $(".reduced.cart-count").click(function(){
+	  //수량 감소버튼 
+	  $(document).on("click",".reduced.cart-count", function(){
 		  var input = document.getElementById('sst'); 
 		  var quantity = input.value*1;	
 		  //input박스 수량 감소
@@ -55,6 +48,19 @@ $(function(){
 			  //return false;  
 		  }
 	  })
+	  
+	  
+	  //주문하기 버튼 이벤트 : 유효성 검사, 장바구니 비어잇으면 메세지 
+  	$("#order-btn").click(function() {
+  		
+  		if($("#cartTotal").text()==0){
+  			alert("장바구니에 상품을 담아주세요");
+  		}
+  		else{
+  			location.href="order.do"
+  		}
+	})
+	  
 });
 
 

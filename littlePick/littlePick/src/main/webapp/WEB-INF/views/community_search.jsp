@@ -17,11 +17,36 @@
 <link rel="stylesheet" href="resources/vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="resources/css/style_0joo.css">
+<script src="resources/vendors/jquery/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	// 사용자의 자료 입력여부를 검사하는 함수
+	
+  $('#write-btn').click(function(){
+	  
+	  var sess = <%= session.getAttribute("user_num") %>;
+
+	  if(sess == null){
+	  	alert("로그인 후 이용하실 수 있습니다.");
+	  	window.location.href="1_login.do";
+	  }
+	  else{
+		  
+		  window.location.href="community_board_input.do";
+	  }
+	
+		})
+
+})
+</script>
 </head>
+
 <body>
 
 <!-- ================ 게시판 상단 ================= -->
 <!-- 헤더 인클루드 -->
+<section>
+      <div class="container">
 <%@ include file="header.jsp"%> 
 
 <!-- 게시판 명 -->
@@ -31,7 +56,7 @@
 	
 <!-- 글쓰기버튼 -->
 	<div class="board-write">
-	<a class="button button-blog" href=community_board_input.do>글쓰기</a>
+	<button class="button button-blog" id="write-btn" >글쓰기</button>
 	</div>
 	
 <!-- 검색창 -->
@@ -85,7 +110,7 @@
 					<div class="categories_post">
 						<a href="community_board_view.do?content_num=${board.content_num}"> <img
 							src="resources/upload/board/${board.content_image}" width="350px"
-							height="350px">
+							height="300px">
 						</a>
 						<div class="blog_info">
 							<a href="community_board_view.do?content_num=${board.content_num}">
@@ -134,7 +159,7 @@
 
 
 
-  <script src="resources/vendors/jquery/jquery-3.2.1.min.js"></script>
+<!--   <script src="resources/vendors/jquery/jquery-3.2.1.min.js"></script> -->
   <script src="resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="resources/vendors/skrollr.min.js"></script>
   <script src="resources/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -143,5 +168,7 @@
   <script src="resources/vendors/mail-script.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   <script src="resources/js/main.js"></script>
+  </div>
+  </section>
 </body>
 </html>

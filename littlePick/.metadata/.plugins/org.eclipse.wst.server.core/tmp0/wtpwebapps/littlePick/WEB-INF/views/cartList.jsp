@@ -70,11 +70,13 @@
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${n.product_count}" title="Quantity:"
-                                          class="input-text qty" style="width:10">
+                                  		<div>
+	                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${n.product_count}" title="Quantity:"
+	                                          class="input-text qty" style="width:10">
+                                       </div>
                                        <div class="cart_qty_btn">
-                                      <button class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
-                                      <button class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
+	                                      <button class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
+	                                      <button class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
                                        </div>
                                   </div>
                               </td>
@@ -112,13 +114,13 @@
                               </td>
                               <td>
                                   <div class="product_count">
-                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${s.product_count}" title="Quantity:"
-                                          class="input-text qty" style="width:10">
+                                  		<div>
+	                                      <input type="text" name="product_count" id="sst" maxlength="12" value="${s.product_count}" title="Quantity:"
+	                                          class="input-text qty" style="width:10">
+                                       </div>
                                        <div class="cart_qty_btn">
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                          class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
-                                      <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                          class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
+                                      <button class="increase cart-count" type="button"><i class="fas fa-angle-up"></i></button>
+                                      <button class="reduced cart-count" type="button"><i class="fas fa-angle-down"></i></button>
                                        </div>
                                   </div>
                               </td>
@@ -145,7 +147,7 @@
                          	 <td></td>
                          	 <td></td>
                               <td ><h5>상품금액</h5></td>
-                              <td class="price_align"><h5>${map.cartTotal }원</h5></td>
+                              <td class="price_align"><h5><span id="cartTotal">${map.cartTotal }</span>원</h5></td>
                               <td></td>  
                           </tr>
                            <tr>
@@ -189,7 +191,7 @@
                                       <a href="main.do">쇼핑계속하기</a>
                                   </div>
                                   <div class="blue-btn">
-                                      <a href="order.do">주문하기</a>
+                                      <a id="order-btn">주문하기</a>
                                   </div>
                                </td>
                               <td></td>

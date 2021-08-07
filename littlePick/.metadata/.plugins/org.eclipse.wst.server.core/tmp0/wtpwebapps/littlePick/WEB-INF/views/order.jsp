@@ -25,7 +25,9 @@
 				<tr>
 					<th colspan="4">주문내역</th>
 				</tr>
+				<c:if test="${map.countNormal != 0}">
 				<tr><td class=delivery_type colspan="4"><i class="fas fa-truck"></i>&nbsp;&nbsp;일반배송</td></tr>
+				</c:if>
 				<c:forEach items="${map.listNormal }" var="n" >		
 						<tr>
 							<td width="200"><img src="resources/img/product/${n.product_image }" alt="" width="150"></td>
@@ -34,8 +36,9 @@
 							<td class="price_align" width="200">${n.single_price}원</td>
 						</tr>
 				</c:forEach>
-				
+				<c:if test="${map.countStar != 0}">
 				<tr><td class=delivery_type colspan="4"><i class="fas fa-shipping-fast"></i>&nbsp;&nbsp;샛별배송</td></tr>
+				</c:if>
 				<c:forEach items="${map.listStar }" var="s" >
 						<tr>
 							<td width="150"><img src="resources/img/product/${s.product_image }" alt="" width="150"></td>

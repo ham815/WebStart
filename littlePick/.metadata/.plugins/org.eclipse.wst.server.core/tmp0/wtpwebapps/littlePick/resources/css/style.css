@@ -4371,7 +4371,7 @@ scale
 
 .product_count {
 	display: flex;
-	position: relative;
+	/* position: relative; */
 	margin-bottom: 24px
 }
 
