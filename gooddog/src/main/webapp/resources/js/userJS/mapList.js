@@ -51,6 +51,17 @@ $(function(){
 
 
 	
+		
+	let place_group=0; // 그룹 없음, 전체리스트
+	let startPage=1; // 사직 페이지 
+	getAjaxMapList(place_group, startPage);
+	
+	mapMaker();
+
+	
+}); //end of function;
+
+function mapMaker(){
 	
 	// 지도 옵션 설정 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -188,34 +199,87 @@ $(function(){
 	    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
 	    map.setBounds(bounds);
 	}
+	
+} // end of function totalMapList
 
 
 
-	// 위치 정보 필터링 	
-	$(".place-filter").click(function(){
-		
-		//========================
-		//시작
-		
-		var place_group = $(this).attr('data-filter');
-		
+
+
+// 위치 정보 필터링 	
+$(".place-filter").click(function(){
+	
+	 // 클릭한 필터링 번호 변수에 저장 
+	let place_group = $(this).attr('data-filter');
+	getAjaxMapList(place_group);
+	
+	
+}); // end of click
+
+
+
+
+
+$(document).on('click', '#prevBtn', function(){
+	
+	//let currentPage = $(this).parent().parent().parent().parent().find('.currentPage').val();
+	//let movePage = currentPage-1;
+	
+	let startPage=$(this).parent().parent().find('.pageNo:first').val();
+	let place_group = $(this).parent().parent().parent().parent().find('.place_group').val();
+	let movePage=parseInt(startPage)-1;
+	
+	getAjaxMapList(place_group, movePage);
+	alert(movePage);
+	
+});
+
+$(document).on('click', '#pageBtn', function(){
+	
+	let movePage=$(this).parent().find('.pageNo').val();
+	let place_group = $(this).parent().parent().parent().parent().find('.place_group').val();
+	
+	alert('pageBtn ==> movePage: '+movePage + ', place_group: ' +place_group);
+	getAjaxMapList(place_group, movePage);
+	
+});
+
+$(document).on('click', '#nextBtn', function(){
+	let endPage=$(this).parent().parent().find('.pageNo:last').val();
+	let place_group = $(this).parent().parent().parent().parent().find('.place_group').val();
+	let movePage = parseInt(endPage)+1;
+	getAjaxMapList(place_group, movePage);
+	alert(movePage);
+	
+	
+});
+
+function getAjaxMapList(place_group, page){
+		//alert("getAjaxMapList ==> place_group:"+place_group+ ", page: "+page)
+	
 		$.ajax({
 			url : "ajaxMapList",
 			data :{
-				place_group : place_group
+				place_group : place_group,
+				page : page
 			},
 			type : "post",
 			success:function(data){
 				//alert(data.mapList[0].place_name);
 				$("#place-info").empty();
-				var mapList = data.mapList;
-				var place_info = [];
-				//var str = '<li class="media" id="storebox">';
-						
+				let mapList = data.mapList;
+				let place_group=data.place_group;
+				let paging = data.paging;
+				let startPage = data.paging.startPage;
+				let endPage = data.paging.endPage;
+				let place_info = [];
+				
+				place_info += '<input class="place_group" type="hidden" value="'+place_group+'">';	
+				//place_info += '<input class="currentPage" type="hidden" value="'+currentPage+'">';	
 				$.each(mapList, function(i){
 					place_info += '<li class="media" id="storebox" >';
 					place_info += '<div>';
-					place_info += '<a class="media-image" href="mapView?place_no="'+mapList[i].place_no+'">';
+					place_info += '<a class="media-image" href="mapView?place_no='+mapList[i].place_no+'">';
 					//place_info += '<img src="../../resources/images/place/cafe.jpg">';
 					place_info += '<img src="../../resources/images/place/place_img/'+mapList[i].place_img+'">';
 					place_info += '</a>';
@@ -233,10 +297,10 @@ $(function(){
 				
 				$("#place-info").append(place_info);
 				
+				
+				
 				$(".pagination").empty();
-				var paging = data.paging;
-				var startPage = data.paging.startPage;
-				var endPage = data.paging.endPage;
+
 				//alert(startPage+','+endPage);
 				//alert(endPage);
 				
@@ -246,86 +310,50 @@ $(function(){
 				var paging_info = [];
 				
 				// 이전페이지 버튼 
-				//paging_prev += '<li class="page-item">'
-				paging_prev += '<a class="page-link" href="/ajaxMapList?page='+(startPage-1)+'"/>'
+				paging_prev += '<li class="page-item">'
+				//paging_prev += '<a id="prevBtn" class="page-link" href="/ajaxMapList?page='+(startPage-1)+'"/>'
+				paging_prev += '<a id="prevBtn" class="page-link" href="#"/>'
 				paging_prev += '<i class="fa fa-chevron-left"></i>'
 				paging_prev += '</a>'
-				//paging_prev += '</li>'	
+				paging_prev += '</li>'	
 				// 페이지 영역에 추가	
 				$(".pagination").append(paging_prev);			
 				
 				
 				// 페이지 그룹 버튼 : 3page씩 표시 
 				for(var i=startPage; i<endPage+1; i++){
-					//paging_info += '<li class="page-item">'
-					paging_info += '<a class="page-link" href="/mapList?page='+i+'"/>'
+					paging_info += '<li class="page-item">'
+					//paging_info += '<a id="pageBtn" class="page-link" href="/ajaxMapList?page='+i+'"/>'
+					paging_info += '<a id="pageBtn" class="page-link" href="#"/>'
+					paging_info += '<input class="pageNo" type="hidden" value="'+i+'">'
 					paging_info += i
 					paging_info += '<span class="sr-only">(current)</span>'
 					paging_info += '</a>'
-					//paging_info += '</li>'
+					paging_info += '</li>'
 				} // end of for
 				//페이지 영역에 추가 
 				$(".pagination").append(paging_info);
 				
 				// 다음페이지 버튼
 				paging_next += '<li class="page-item">'
-				paging_next += '<a class="page-link" href="/mapList?page='+(endPage+1)+'"/>'
+				//paging_next += '<a id="nextBtn" class="page-link" href="/ajaxMapList?page='+(endPage+1)+'"/>'
+				paging_next += '<a id="nextBtn" class="page-link" href="#"/>'
 				paging_next += '<i class="fa fa-chevron-right"></i>'
 				paging_next += '</a>'
 				paging_next += '</li>'
 				//페이지 영역에 추가 
 				$(".pagination").append(paging_next);
 							
-				
 /*				for (var i=0; i<data.placeCount; i++){
 					alert(data.mapList[i].place_name);
 				}*/
 				
 			},
 			error: function(){
-				alert("error: ajaxMapList")
+				alert("error: ajaxMapList : total")
 			}
 		}) // end of ajax
-		//종료
-		//========================
-/*		//현재 url 가져오기 
-		var currentUrl = window.location.href; 
 		
-		// 현재 url에 문자열 추가 
-		var baseUrl = "http://localhost:8082/mapList" ;
 		
-		// 선택된 태그의 data-fillter 속성 가져오기 
-		var keyword = $(this).attr('data-filter');
-				
-		// 반환할 url 변수 선언
-		var url
 		
-		// 페이지 파라미터 제거하기 
-		if(currentUrl.includes("page")){
-			
-			//url 초기화 			
-			currentUrl = baseUrl;					
-		}
-		
-		// 중복 keyword 허용하지 않음 
-		// 현재 url에 keyword가 있으면 = 이후 data-fillter 숫자 교체 
-		if(currentUrl.includes("keyword")){
-			var index = currentUrl.indexOf('=')+1;
-			url = currentUrl.replace(currentUrl[index],keyword)
-		}
-		// 현재 url에 keyword가 없으면 성생  
-		else{
-			url = baseUrl + "?keyword=" +keyword;
-		}			
-		
-		// url 주소로 페이지 이동 
-		location.href = url;*/
-		
-	}); // end of click
-	
-	//필터 + 페이징 
-	
-	
-
-	
-})
+} //end of function getAjaxMapList;

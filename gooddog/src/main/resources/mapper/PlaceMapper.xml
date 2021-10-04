@@ -21,7 +21,7 @@
 	<!-- 장소 목록 조회 ajax -->
 	<select id="ajaxPlaceList" parameterType="hashmap" resultType="hashmap">
 		SELECT * FROM place
-		WHERE place_group = #{place_group}
+		<if test = 'place_group != 0'>WHERE place_group = #{place_group}</if>		
 		ORDER BY place_no
 		LIMIT #{pageStart}, #{perPageNum}
 	</select>
@@ -30,7 +30,7 @@
 	<select id="ajaxPlaceCount" resultType="int">
         SELECT count(*)
         FROM place 
-        WHERE place_group = #{place_group}
+        <if test = 'place_group != 0'>WHERE place_group = #{place_group}</if>
 	</select>
 	
 	

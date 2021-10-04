@@ -554,15 +554,15 @@
                 <div id="login-header">	
 					<c:if test="${empty sessionScope.user }">
 					<div id="login-header" style="display:flex;">
-						<div style=margin-right:30px;><a href="loginForm">로그인</a></div>
-						<div style=margin-right:30px;><a href="joinForm">회원가입</a></div>
+						<div style=margin-left:30px;><a href="loginForm">로그인</a></div>
+						<div style=margin-left:30px;><a href="joinForm">회원가입</a></div>
 					</div>
 					</c:if>
 					<c:if test="${not empty sessionScope.user}">
-					<div id="login-header" style="display:flex;">
-						<div style=margin-right:30px;>${user.user_id}</div>
-						<div style=margin-right:30px;><a href="mypageModify">마이 페이지</a></div>
-						<div style=margin-right:30px;><a href="/logout" id="session_logout">로그아웃</a></div>
+				<div id="login-header" style="display:flex;">
+						<div style=margin-left:30px;>${user.user_id}</div>
+						<div style=margin-left:30px;><a href="mypageModify">마이 페이지</a></div>
+						<div style=margin-left:30px;><a href="/logout" id="session_logout">로그아웃</a></div>
 					</div> 
 					</c:if>
 				</div>
