@@ -39,8 +39,7 @@
 
 <body>
 <%@ include file="./header.jsp" %>
-
-
+ 
 			<section class="ls s-py-60 s-py-md-90 s-py-xl-155">
 				<div class="container">
 					<div class="row">
@@ -59,26 +58,29 @@
 										<a href="#">펫 실종신고</a>
 									</li>
 									<li>
-										<a href="../mypageFind">견종찾기</a>
+										<a href="../mypageFind">친구 관리</a>
 									</li>
 									<li>
-										<a class="logoutClick" href="../mainPage">로그아웃</a>
-									</li> 
+										<a class="logoutClick" href="../mainPage">회원탈퇴</a>
+									</li>  
 								</ul> 
 						</div>
 							
-					
+					 
 						<main class="col-lg-8">
 							<article>
 								<div >
 									<h4 style="text-align: left;">회원 정보 수정</h4><br>
 								</div>
 								<div> 
-									<div>  
+									<div>   
 										<form action="#">
-											<img src="#" style="height:200px; width:200px;">
-										
-											<div>
+											<div id="preview3">
+											<img src="${path}/resources/images/userimg/${myvo.user_img}" style="height:200px; width:200px;">
+											</div> 
+											<input type="file" id="modify_file" name="modify_file" accept="image/*" onchange="previewImage(this)" />
+											<button type="button" id="img_modify_btn">수정하기</button> 
+											<div>    
 												<div><a>아이디</a></div><a>${myvo.user_id}</a>  
 											</div>
 											<br>
@@ -88,21 +90,6 @@
 											<a>${myvo.user_name}</a>
 											<div>
 											<br>
-											<a>현재 비밀번호</a>
-											</div>
-											<div>
-												<input type="password" id="modify_user_pwd" name="modify_user_pwd" placeholder="비밀번호" style="width: 700px;"><a id="user_pwd_chk"></a><br><br>
-											</div>
-											<a>변경 할 비밀번호</a>  
-											<div>
-												<input type="password" id="modify_user_pwd2" name="modify_user_pwd2" placeholder="비밀번호 입력" style="width: 700px;"><a id="user_pwd_chk2"></a><br><br>
-											</div>
-											<a>비밀번호 확인</a>  
-											<div>
-												<input type="password" id="modify_user_pwd3" name="modify_user_pwd3" placeholder="비밀번호 확인" style="width: 700px;"><a id="user_pwd_chk2"></a><br><br>
-											</div>
-											
-											<div id="modify_test"></div>
 											<div>
 												<div><a>생년월일</a></div>
 												<a>${myvo.user_birth}</a>
@@ -112,28 +99,49 @@
 												<div><a>성별</a></div>
 												<a>${myvo.user_gender}</a>
 											</div>
+											<hr>
+											<h3>비밀번호 변경</h3>
+											<a>현재 비밀번호</a>
+											</div>
+											<div>
+												<input type="password" id="modify_user_pwd" name="modify_user_pwd" placeholder="********" style="width: 700px;"><a id="user_pwd_chk"></a><br><br>
+											</div>
+											<a>변경 할 비밀번호</a>  
+											<div>
+												<input type="password" id="modify_user_pwd2" name="modify_user_pwd2" placeholder="********" style="width: 700px;"><a id="user_pwd_chk2"></a><br><br>
+											</div>
+											<a>비밀번호 확인</a>  
+											<div>
+												<input type="password" id="modify_user_pwd3" name="modify_user_pwd3" placeholder="********" style="width: 700px;"><a id="user_pwd_chk2"></a><br><br>
+											</div>
+											<div id="modify_error"></div> 
 											<br>
+											<div id="modify_test">
+											<button type="button" class="btn" id="pwd_modify_btn">비밀번호 변경</button>
+											</div>
+											<hr>
+											<h3>기타 정보 변경</h3>
 											<a>주소</a>
 											<div> 
-												<input type="text" id="sample6_address" name="user_addr1" placeholder="주소" style="width:550px;">
-												<button type="button" class="btn btn-success btn-sm" id="addrClick">주소입력</button><br><br>   
+												<input type="text" id="sample6_address_modify" name="user_addr1" placeholder="주소" style="width:500px;" value="${myvo.user_addr}" readonly>
+												<button type="button" class="btn btn-success btn-sm" id="addrClick_modify">주소입력</button><br><br>   
 										
-												<input type="text" id="sample6_extraAddress" name="user_addr1" placeholder="주소" style="width:550px;"><br><br>
+												<input type="text" id="sample6_extraAddress_modify" name="user_addr1" placeholder="주소" style="width:500px;" readonly><br><br>
 											</div>
 											<a>전화번호</a>
-											<div>      
-												<input type="tel" id="user_tel" name="user_tel" placeholder="연락처" style="width: 700px;"><br><br>
+											<div>       
+												<input type="tel" maxlength="11" id="user_modify_tel" name="user_modify_tel" value="${myvo.user_tel}" placeholder="연락처" style="width: 700px;"><br><br>
 											</div>
 											<a>닉네임</a>
 											<div> 
-												<input type="text" id="user_nick" name="user_nick" placeholder="닉네임" class="input-text" style="width: 550px;">&nbsp&nbsp<button type="button" class="btn btn-success btn-sm" id="addrClick">중복확인</button><br><br>
+												<input type="text" id="user_nick_modify" name="user_modify_nick" placeholder="${myvo.user_gender}" class="input-text" style="width: 550px;">&nbsp&nbsp<button type="button" class="btn btn-success btn-sm" id="user_nick_modify_click">중복확인</button><br><br>
 											</div>
-											<div style="float:center"> 
-											<button style="float:center" class="btn btn-success" type="submit" id="user_modify" value="확인">확인</button>  
+											<div style="float:center">  
+											<button style="float:center" class="btn btn-success" type="button" id="user_modify" value="확인">확인</button>  
 											</div> 
-										</form> 
+										</form>   
 									</div>
-								</div>
+								</div> 
 								
 							</article>
 
@@ -155,6 +163,42 @@
 	<script src="${path}/resources/js/main.js"></script> 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="${path}/resources/js/userJS/myPage.js"></script>
+	 
+	 
+	<script type="text/javascript">
+function previewImage(f){
+ 
+	var file = f.files;
+
+	// 확장자 체크
+	if(!/\.(gif|jpg|jpeg|png)$/i.test(file[0].name)){
+		alert('gif, jpg, png 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+
+		// 선택한 파일 초기화
+		f.outerHTML = f.outerHTML;
+
+		document.getElementById('preview3').innerHTML = '';
+
+	} 
+	else { 
+
+		// FileReader 객체 사용
+		var reader = new FileReader();
+
+		// 파일 읽기가 완료되었을때 실행
+		reader.onload = function(rst){
+			$("#preview3").empty(); 
+			document.getElementById('preview3').innerHTML = '<img src="' + rst.target.result + '">';
+		} 
+
+		// 파일을 읽는다
+		reader.readAsDataURL(file[0]);
+
+	} 
+}
+
+
+</script>
 	 
 	
 

@@ -36,26 +36,119 @@
 	<![endif]-->
 
 </head>
-
+ 
 <body>
-<%@ include file="./header.jsp" %>		
+<script type="text/javascript">
+function previewImage(f){
+ 
+	var file = f.files;
+
+	// 확장자 체크
+	if(!/\.(gif|jpg|jpeg|png)$/i.test(file[0].name)){
+		alert('gif, jpg, png 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+
+		// 선택한 파일 초기화
+		f.outerHTML = f.outerHTML;
+
+		document.getElementById('preview_join').innerHTML = '';
+
+	} 
+	else {
+
+		// FileReader 객체 사용
+		var reader = new FileReader();
+
+		// 파일 읽기가 완료되었을때 실행
+		reader.onload = function(rst){
+			document.getElementById('preview_join').innerHTML = '<img src="' + rst.target.result + '">';
+		}
+
+		// 파일을 읽는다
+		reader.readAsDataURL(file[0]);
+
+	} 
+}
+
+</script>
+
+
+	<!--[if lt IE 9]>
+		<div class="bg-danger text-center">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" class="color-main">upgrade your browser</a> to improve your experience.</div>
+	<![endif]-->
+
+	<div class="preloader">
+		<div class="preloader_image">
+		</div>
+	</div>
+
+	<!-- search modal -->
+	<div class="modal" tabindex="-1" role="dialog" aria-labelledby="search_modal" id="search_modal">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<div class="widget widget_search">
+			<form method="get" class="searchform search-form" action="/">
+				<div class="form-group">
+					<input type="text" value="" name="search" class="form-control" placeholder="Search keyword" id="modal-search-input">
+				</div>
+				<button type="submit"></button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Unyson messages modal -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="messages_modal">
+		<div class="fw-messages-wrap ls p-normal">
+			<!-- Uncomment this UL with LI to show messages in modal popup to your user: -->
+			<!--
+		<ul class="list-unstyled">
+			<li>Message To User</li>
+		</ul>
+		-->
+
+		</div>
+	</div><!-- eof .modal -->
+
 	<!-- wrappers for visual page editor and boxed version of template -->
 	<div id="canvas">
 		<div id="box_wrapper">
+
+			<!-- template sections -->
+
+	
+
+			<!-- header with two Bootstrap columns - left for logo and right for navigation and includes (search, social icons, additional links and buttons etc -->
+			
+<%@ include file="./header.jsp" %>
+
+	<!-- wrappers for visual page editor and boxed version of template -->
+	<div id="canvas">
+		<div id="box_wrapper">
+
 			<section class="ls s-py-60 s-py-md-90 s-py-xl-155">
 				<div class="container">
 					<div class="row">
+						<div class="col-lg-2">
+						
+						</div> 
 						<main class="col-lg-8">
 							<article>
 								<div >
 									<h4 style="text-align: left;">회원 가입</h4><br>
 								</div>
+								<input type="file" name="join_file" id="join_file" accept="image/*" onchange="previewImage(this)" />
+								<div id="preview_join"></div>
+								<br>  
 								<div> 
 									<div>  
 										<form action="#"> 
+											<div id="image_container"">
+											
+											</div>
+											
 											<div>
 											<a>아이디</a>
-											</div> 
+											</div>  
 											<div>
 												<input type="text" id="user_id" name="user_id" placeholder="아이디" class="input-text" style="width: 550px;"><button type="button" class="btn btn-success btn-sm" id="idClick">중복확인</button><br><br>
 											</div>
@@ -75,9 +168,9 @@
 											</div>
 											<a>생년월일</a> 
 											<div>
-												<input type="text" id="user_birth" name="user_birth" style="width: 200px;"><label>년</label>
-												<input type="text" id="user_birth" name="user_birth" style="width: 100px;"><label>월</label>
-												<input type="text" id="user_birth" name="user_birth" style="width: 100px;"><label>일</label><br><br>
+												<input type="number" id="user_birth" name="user_birth" style="width: 200px;" min="1900" max="2010" ><label>년</label>
+												<input type="number" id="user_birth" name="user_birth" style="width: 100px;" min="1" max="12"><label>월</label>
+												<input type="number" id="user_birth" name="user_birth" style="width: 100px;" min="1" max="31"><label>일</label><br><br>
 											</div>
 											<a>성별</a>
 											<div style="width: 650px;">
@@ -85,14 +178,14 @@
 											</div>
 											<a>주소</a>
 											<div>
-												<input type="text" id="sample6_address" name="user_addr1" placeholder="주소" style="width:550px;">
+												<input type="text" id="sample6_address" name="user_addr1" placeholder="주소" style="width:500px; readonly; ">
 												<button type="button" class="btn btn-success btn-sm" id="addrClick">주소입력</button><br><br>   
-										
-												<input type="text" id="sample6_extraAddress" name="user_addr1" placeholder="주소" style="width:550px;"><br><br>
+										 
+												<input type="text" id="sample6_extraAddress" name="user_addr1" placeholder="주소" style="width:500px;" readonly><br><br>
 											</div>
 											<a>전화번호</a>
 											<div>      
-												<input type="tel" id="user_tel" name="user_tel" placeholder="연락처" style="width: 700px;"><br><br>
+												<input maxlength="11" type="tel" id="user_tel" name="user_tel" placeholder="연락처" style="width: 700px;"><br><br>
 											</div>
 											<a>닉네임</a>
 											<div> 
@@ -108,13 +201,14 @@
 							</article>
 
 						</main>
-						<div class="col-lg-4">
-							<img src="#" style="height:200px; width:200px;">
+						<div class="col-lg-2">
 						</div>
 					</div>
 
 				</div>
 			</section>
+
+
 
 			<%@ include file="./footer.jsp" %>		
 
@@ -126,7 +220,7 @@
 	<script src="${path}/resources/js/main.js"></script> 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="${path}/resources/js/userJS/myPage.js"></script>
-	 
+	
 	
 
 </body>

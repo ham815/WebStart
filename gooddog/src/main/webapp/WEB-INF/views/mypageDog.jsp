@@ -36,6 +36,41 @@
 </head>
 
 <body> 
+<script type="text/javascript">
+function previewImage1(f){
+ 
+	var file = f.files;
+ 
+	// 확장자 체크
+	if(!/\.(gif|jpg|jpeg|png)$/i.test(file[0].name)){
+		alert('gif, jpg, png 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+
+		// 선택한 파일 초기화
+		f.outerHTML = f.outerHTML;
+
+		document.getElementById('preview2').innerHTML = '';
+ 
+	} 
+	else { 
+
+		// FileReader 객체 사용
+		var reader = new FileReader();
+
+		// 파일 읽기가 완료되었을때 실행
+		reader.onload = function(rst){
+			document.getElementById('preview2').innerHTML = '<img src="' + rst.target.result + '">';
+		}
+
+		// 파일을 읽는다
+		reader.readAsDataURL(file[0]);
+
+	} 
+}
+
+
+</script>
+
+<%@ include file="./header.jsp"%> 
 	<!--[if lt IE 9]>
 		<div class="bg-danger text-center">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" class="color-main">upgrade your browser</a> to improve your experience.</div>
 	<![endif]-->
@@ -45,19 +80,7 @@
 	</div>
 
 	<!-- search modal -->
-	<div class="modal" tabindex="-1" role="dialog" aria-labelledby="search_modal" id="search_modal">
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		<div class="widget widget_search">
-			<form method="get" class="searchform search-form" action="/">
-				<div class="form-group">
-					<input type="text" value="" name="search" class="form-control" placeholder="Search keyword" id="modal-search-input">
-				</div>
-				<button type="submit"></button>
-			</form>
-		</div>
-	</div>
+	
 
 	<!-- Unyson messages modal -->
 	<div class="modal fade" tabindex="-1" role="dialog" id="messages_modal">
@@ -75,6 +98,7 @@
 	<!-- wrappers for visual page editor and boxed version of template -->
 	<div id="canvas">
 		<div id="box_wrapper">
+
 
 <%@ include file="./header.jsp" %>			
 
@@ -96,43 +120,52 @@
 									<li class="is-active">
 										<a href="#">펫 실종신고</a>
 									</li>
+
+									<li>
+										<a href="../mypageFind">친구 관리</a>
+									</li>
+									<li>
+										<a class="logoutClick" href="../mainPage">회원탈퇴</a>
+									</li> 
+
 								</ul> 
 							</nav>
 						</div>
 							<div class="col-lg-4 mt-40 mt-lg-0 animate" data-animation="scaleAppear">
-							
-							<img src="#" style="width:300px; height:300px; margin: 3px; bottom:20px"></img>
-						</div>  
-						<!--.col-* -->	
+								<div id="preview2">
+								</div>
+							</div>  
+						<!--.col-* -->	 
 						<div data-animation="scaleAppear" class=" col-lg-5 animate">
 							
-							<form class="contact-form c-mb-20 c-gutter-20" method="post" action="/">
-
+							<form id="upload-file-form" class="contact-form c-mb-20 c-gutter-20" method="post" action="/">
+								<input type="file" id="dog_file" name="dog_file" accept="image/*" onchange="previewImage1(this)" />
+							 	  
 								<div class="form-group has-placeholder">
-									<div class="form-group has-placeholder div_pet_name">이름&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_name" type="text" placeholder="강아지 이름을 입력하세요"></div>
-								</div>
+									<div class="form-group has-placeholder div_pet_name">이름&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_input_name" type="text" placeholder="강아지 이름을 입력하세요"></div>
+								</div> 
   
 								<div class="form-group has-placeholder">
-									<div class="form-group has-placeholder div_pet_name">나이&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_name" type="text" placeholder="강아지 나이를 입력하세요"></div>
+									<div class="form-group has-placeholder div_pet_name">나이&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_input_date" type="text" placeholder="강아지 나이를 입력하세요"></div>
 								</div>
 
 								<div class="form-group has-placeholder">
-									<div class="form-group has-placeholder div_pet_name">번호&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_name" type="text" placeholder="강아지 인식번호를 입력하세요"></div>
+									<div class="form-group has-placeholder div_pet_name">번호&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_input_number" type="text" placeholder="강아지 인식번호를 입력하세요"></div>
 								</div>  
 								<div class="form-group has-placeholder">
 									<div style="width: 650px;">
-										성별&nbsp&nbsp<b>암</b>&nbsp&nbsp&nbsp<input type="radio" value="1" class="user_gender" name="user_gender">&nbsp&nbsp&nbsp<b>수</b>&nbsp&nbsp&nbsp<input type="radio" value="2" class="user_gender" name="user_gender"><br>
+										성별&nbsp&nbsp<b>암</b>&nbsp&nbsp&nbsp<input type="radio" value="1" class="pet_input_gender" name="pet_input_gender">&nbsp&nbsp&nbsp<b>수</b>&nbsp&nbsp&nbsp<input type="radio" value="2" class="pet_input_gender" name="user_gender"><br>
 									</div>
 								</div>
 									<div class="form-group has-placeholder">
-									<div class="form-group has-placeholder div_pet_name">종족&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_name" type="text" placeholder="강아지 종을 입력하세요"></div>
+									<div class="form-group has-placeholder div_pet_name">종족&nbsp&nbsp<input style="height:40px; width:300px;" class="pet_input_spacies" type="text" placeholder="강아지 종을 입력하세요"></div>
 									</div>
 								<div class="form-group d-flex-row-reverse align-items-center flex-column flex-md-row mt-40">
 								<div class="container">
 								<div class="row">   
 									<div class='col-md-12'>
 									<div style="text-align:center; right:20px; margin:0px;">
-									<button  type="button" id="contact_form_submit" name="contact_submit" class="btn btn-maincolor btn-xs" >확인
+									<button  type="button" class="pet_submit_btn" name="contact_submit" class="btn btn-maincolor btn-xs" >확인
 									</button> 
 									</div> 
 									</div>
@@ -149,7 +182,7 @@
 						
 						</div>
 						</div> 
-							<!--  -->
+							<!--  --> 
 							
 							 
 						
@@ -165,18 +198,19 @@
 			</section>
 
 
+
 <%@ include file="./footer.jsp" %>		
+
 		</div><!-- eof #box_wrapper -->
 	</div><!-- eof #canvas -->
-
-
+ 
 	<script src="${path}/resources/js/compressed.js"></script>
 	<script src="${path}/resources/js/main.js"></script>
 	<script src="${path}/resources/js/userJS/myPage.js"></script>
 
 	<!-- Google Map Script -->
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=templateInitGoogleMap&key=AIzaSyC0pr5xCHpaTGv12l73IExOHDJisBP2FK4"></script>
-
+	
 </body>
 
 </html> 

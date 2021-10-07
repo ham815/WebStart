@@ -38,8 +38,168 @@
 	<![endif]-->
 
 </head>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+<script type="text/javascript">
+//------테이블 만들기 및 페이징 -------
+$(document).ready(function(){
+	
+	bookList();
+});
+
+function bookList(){
+
+		var returnHtml = "";
+		var pageHtml = '';
+			
+			
+		var page = $('#page').val();
+		$.ajax({	
+			type:'POST',
+			data: 'page='+page,
+			url:"/bookList",
+			dataType: "json",
+			async    : false,
+			success : function(data) {
+		
+				var nextPage = data.nextPage;
+				var prevPage = data.prevPage;
+				var pageIn = data.pageIn;
+				var startPage = data.page.startPage;
+				var endPage = data.page.endPage;
+				endPage = endPage +1;
+				for(var p=startPage; p<endPage; p++){
+				
+					pageHtml += "<a href='javascript:pageGo("+p+");'>"+p+"</a>"+"&nbsp;&nbsp;&nbsp;&nbsp;";
+				}
+				
+		
+				$('#pageId').html(pageHtml);
+				$('#page').val(pageIn);
+				$('#nextPage').val(nextPage);
+				$('#prevPage').val(prevPage);
+				
+				var cnt = data.list.length; 
+					
+				if(cnt == 0){
+					alert("사용자가 없습니다");
+				}else{
+					for(var i=0; i<cnt; i++){
+						var dic_no = data.list[i].dic_no;		
+						var dic_name = data.list[i].dic_name;
+						
+						
+						
+						returnHtml += "<tr>"
+						
+						returnHtml += "<td class ='dic_no'>"+dic_no+"</td>"
+						returnHtml += "<td class = 'dic_name'>"+dic_name+"</td>"
+		
+	//					returnHtml += '<td><button type="submit" id="book_delete_submit" class="book_create_btn">등록</button></td>'						
+						returnHtml += '<td><a href= "../bookList" class="book_modify_btn" >상세보기</a></td>'
+						returnHtml += '<td><button type="button" id="book_delete_submit" class="book_delete_btn" >삭제</button></td>'
+						
+							
+						
+						returnHtml += "</tr>"
+						
+					}
+				}
+				
+				$('#bookList1').html(returnHtml);
+			}
+			
+	});
+	
+
+	
+}
+//--------------------------페이징 ------------------------
+function pageGo(pageNum){
+	if(pageNum == 0){
+	// 이전페이지
+		$('#page').val($('#prevPage').val());
+		bookList();
+	}else if(pageNum == 999){
+	// 다음페이지
+		$('#page').val($('#nextPage').val());
+		bookList();
+	}else{
+		$('#page').val(pageNum);		// 사용자가 누른 페이지
+		bookList();
+	}
+}
+
+//-----------------------info  등록 기능----------------------
+bookList();
+
+
+//$(document).on('click', '.book_modify_btn', function(){
+//	$.ajax({
+//		type:'post',
+//		url:'/bookModify',async    : false,
+//		data: {dic_no : $(this).parent().parent().find(".dic_no").val(),
+//			   dic_name : $(this).parent().parent().find(".dic_name").val()},
+//		success: function(data) { 
+//			alert("수정이 완료됐습니다")
+//		} 
+		
+//	})      
+	//   페이지를 어떻게 넘겨야하지??? ajax로 페이지를 넘길 수 없나
+	
+//}) 
+
+//-------------------------------------테스트------------------------
+$(document).on('click','.book_modify_btn', function(){
+alert("등록")
+///////////////////////////////////////////////////////////////
+//$.ajax({
+//	type : 'post',
+//		url : '/bookModify',
+//		async : false,
+//	    data:{dic_no :$(this).parent().parent().find(".dic_no").text()},
+	    
+//		success:function(data){
+//			alert("페이지이동");
+//			location.href = "/bookModify?dic_no="+$(this).parent().parent().find(".dic_no").text()
+//		} 
+	})
+//})
+// -----------------------info 삭제 기능 on-------------------------- 
+
+$(document).on('click', '.book_delete_btn', function(){
+	alert("zmfflr")
+	$.ajax({
+		type:'post',
+		url:'/bookDelete',
+		
+  	data: {dic_no : $(this).parent().parent().find(".dic_no").text()},
+	success: function(data){
+			alert("삭제완료");
+			bookList(); 
+		} 
+	})
+})
+
+//----------------------------------갤러리 불러오기 -------------------------------
+
+
+</script>
 
 <body>
+
+
+
+	<form>
+	<input type="hidden" name="page" id="page" value="1" />
+	<input type="hidden" name="nextPage" id="nextPage" />
+	<input type="hidden" name="prevPage" id="prevPage" /> 
+	</form>
+
+
+
+
 	
 	<c:set var="now" value="<%=new java.util.Date() %>"/>
 
@@ -70,173 +230,72 @@
         
             <!-- Linknav -->
             <%@include file ="link_nav.jsp" %>
-            
+
             <div id="layoutSidenav_content">
             
-                <main>
+                 <main>
                     <div class="container-fluid px-4">
-                        <h2 class="mt-4">게시글 관리</h2>
+                        <h2 class="mt-4">백과사전 관리</h2>
                     
-                       <div class="card mb-2" style="float: left; width: 45%; text-align: center;">
+                       <div class="card mb-4" style="float: left; width: 45%; text-align: center;">
                             <div class="card-header">
-                                <i class="fas fa-address-card me-1"></i>
-                                 <a>gallery</a>  
+                                <i class="fas fa-address-card me-1" ></i>
+                   			info
                             </div>
-                            <div class="card-body" >
+                            <form action="/admin_post/search" method="get">
+                            	<div class="search">
+                            		<input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+      
+                            	</div>
+                            	<input type="submit" style="float: right;" value="검색">
+                            </form>
+                            
+                                
+                            
+                            <div class="">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
+                                            <th>글번호</th>
+                                            <th>제목</th>
+                                            
+                                            <th>상세보기</th>
+                                            <th>삭제</th>
+                                            
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    	<c:forEach items="${customerList}" var="customer">
-                                    		<tr>
-                                    			<td>${customer.memId}</td>
-                                    			<td>${customer.memAddr}</td>
-                                    			<td>${customer.memName}</td>
-                                    			<td>${customer.memPhone}</td>
-                                    		</tr>
-                                    	</c:forEach>
+                                  
+                                    <tbody id="bookList1">
+                                    	
+                                    	
+												
                                     </tbody>
                                 </table>
-                                
-                                
                             </div>
+                            <!--  page -->
+                              <a href="javascript:pageGo(0)">이전</a>
+                             <div class="userpage" id="pageId"> </div>
+                              <a href="javascript:pageGo(999)">다음</a>
                         </div>
                         
-                         <div class="card mb-2" style="float: right; width: 45%; text-align: center;">
-                            <div class="card-header">
-                                <i class="fas fa-address-card me-1"></i>
-                              <a href="admin_galleryList.do">info</a>  
-                                
-                            </div>
-                            <div class="card-body" >
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    	<c:forEach items="${list}" var="book">
-                                    		<tr>
-                                    			<td>${book.dic_name }</td>
-                                    			<td>${customer.memAddr}</td>
-                                    			<td>${customer.memName}</td>
-                                    			<td>${customer.memPhone}</td>
-                                    		</tr>
-                                    	</c:forEach>
-                                    </tbody>
-                                </table>
-                                
-                                
-                                
-                            </div>
-                        </div>
-                         <div class="card mb-2" style="float: left; width: 45%; text-align: center;">
-                            <div class="card-header">
-                                <i class="fas fa-address-card me-1"></i>
-                                 <a href="admin_bookList.do">실종신고 1</a>  
-                            </div>
-                            <div class="card-body" >
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    	<c:forEach items="${customerList}" var="customer">
-                                    		<tr>
-                                    			<td>${customer.memId}</td>
-                                    			<td>${customer.memAddr}</td>
-                                    			<td>${customer.memName}</td>
-                                    			<td>${customer.memPhone}</td>
-                                    		</tr>
-                                    	</c:forEach>
-                                    </tbody>
-                                </table>
-                                
-                                
-                            </div>
-                        </div>
-                         <div class="card mb-2" style="float: right; width: 45%; text-align: center;">
-                            <div class="card-header">
-                                <i class="fas fa-address-card me-1"></i>
-                                 <a href="admin_callingList.do">실종 신고2</a>  
-                            </div>
-                            <div class="card-body" >
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>주소</th>
-                                            <th>이름</th>
-                                            <th>전화번호</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    	<c:forEach items="${customerList}" var="customer">
-                                    		<tr>
-                                    			<td>${customer.memId}</td>
-                                    			<td>${customer.memAddr}</td>
-                                    			<td>${customer.memName}</td>
-                                    			<td>${customer.memPhone}</td>
-                                    		</tr>
-                                    	</c:forEach>
-                                    </tbody>
-                                </table>
-                                
-                                
-                            </div>
-                        </div>
+                   
+
+               
+                        
+                         
                         
                     </div>
+                  
+                  
+
+                       
+                    
                 </main>
-                    </div>
+                   
 		
+
+
+
 
 	<script src="${path}/resources/js/compressed.js"></script>
 	<script src="${path}/resources/js/main.js"></script>

@@ -4,7 +4,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="/index">
+                            <a class="nav-link" href="/mainPage">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 홈페이지
                             </a>
@@ -20,8 +20,21 @@
                              
                              <a class="nav-link" href="admin_post.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                게시글관리
+                                백과사전관리
                             </a>
+                            <a class="nav-link" href="admin_post2.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                갤러리관리
+                            </a>
+                            <a class="nav-link" href="admin_post3.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                실종신고관리
+                            </a>
+                              <a class="nav-link" href="admin_post4.do">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                실종신고관리2
+                            </a>                          
+                            
                               <a class="nav-link" href="admin_black.do">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 신고

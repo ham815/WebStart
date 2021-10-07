@@ -37,6 +37,10 @@
 </head>
 
 <body>
+
+
+
+
 <%@ include file="./header.jsp" %>
 
 
@@ -52,9 +56,11 @@
 								<div class="entry-content">
 									<div class="woocommerce">
 
+
 										<div class="login-title">
 										<h2>Log in</h2>
 										</div>
+
 
 										<form class="woocomerce-form woocommerce-form-login login" method="post" width:50%>
 											<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide text-center">
@@ -65,6 +71,17 @@
 
 												<input class="w-100 form-control woocommerce-Input woocommerce-Input--text input-text" placeholder="비밀번호*" type="password" name="password" id="password">
 											</p>
+
+											<!-- <p class=" d-flex justify-content-start align-items-center">
+												<label class="d-flex align-items-center woocommerce-form__label woocommerce-form__label-for-checkbox inline">
+													<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever">
+													<span>Remember me</span>
+												</label>
+											</p> -->
+											<div style="color:red" id="id_pwd_error"></div>
+											<br>
+											 
+											<div class="container"> 
 
 											<div class="login-btn">
 												<button type="button" class="woocommerce-Button button mt-0" name="login" id="loginClick" value="Login" style="text-align:center; ">로그인</button><br>
@@ -78,6 +95,7 @@
 											</div>
 											<div class="joinMove">
 													<a href="../joinForm">회원 가입</a>
+
 											</div>	 
 											    
 

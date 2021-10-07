@@ -9,21 +9,156 @@
 	<!-- 회원목록 불러오기 -->
 		<select id="getUserInfo" resultType="UserVO" parameterType="UserVO">
 				<![CDATA[
-			SELECT * FROM user WHERE user_id = 0 
+			SELECT * FROM user WHERE user_id = 0 ORDER BY user_id asc LIMIT #{limitStart}, #{listCount}
 			]]>
 		</select>
-          
-
+    
+    <!--  회원 목록 수 -->
+    <select id="userCount" resultType="int" parameterType="UserVO"> 
+				<![CDATA[
+			SELECT count(*) FROM user
+			]]>
+		</select>
+    
+	
 	<!-- 블랙리스트 불러오기 -->
 		<select id="getBlackInfo" resultType="BlackVO" parameterType="BlackVO">
 	 			<![CDATA[
-			SELECT * FROM black WHERE user_id = 0 
+			SELECT * FROM black WHERE user_id = 0 ORDER BY user_id 
 			]]>
 		</select>
+	
+	<!--  블랙리스트 목록 수 -->
+    <select id="blackCount" resultType="int" parameterType="BlackVO">
+				<![CDATA[
+			SELECT count(*) FROM black
+			]]>
+		</select>
+	
+
+	 
+	<!-- 남자회원수 -->
+
+	<select id="getMenCount" resultType="int" parameterType="UserVO">
+			<![CDATA[
+				select count(*) from user where user_gender=1; 
+			]]>
+		</select>
+	
+	<!-- 여자회원수 -->
+
+		<select id="getWomenCount" resultType="int" parameterType="UserVO">
+				<![CDATA[
+					select count(*) from user where user_gender=2; 
+				]]>
+			</select>
+<!-- 000000000000000000000000000000000000000admin_post000000000000000000000000000000000000 -->
+
 			<!--  info 정보 가져오기 -->
-	<select id="adminpost" resultType="BookVO">
-		<![CDATA[
-		SELECT * FROM book 
+
+	<select id="adminpost" parameterType="BookVO" resultType="BookVO">
+		<![CDATA[ 
+		    SELECT * FROM book WHERE dic_no ORDER BY dic_no asc LIMIT #{limitStart}, #{listCount}
+		
+		
 		]]>
+		
+				
 	</select>
+	
+	<!-- 페이징  -->
+
+
+
+<select parameterType="BookVO" resultType="int" id="bookCount">
+
+<![CDATA[
+         SELECT count(*) FROM book 
+         ]]>
+</select>
+<!-- /////////////////////info 수정 기능  -->
+	<select id="bookModify" parameterType="BookVO" resultType="BookVO">
+		<![CDATA[
+		select * from book WHERE dic_no = #{dic_no}
+	]]>
+	</select>
+<!-- /////////////////// -->
+<!--  ////////////info 삭제 기능//////////// -->
+
+<select parameterType="BookVO"  id="bookDelete">
+
+<![CDATA[
+         delete from book where dic_no =#{dic_no} 
+         ]]>
+</select>
+
+<!--  0000000000000000000000000000000000000000000000 -->
+
+<!-- 000000000000000000000000000000000000000adminpost2000000000000000000000000000000000000 -->
+
+		
+
+	<select id="adminpost2" parameterType="GalleryVO" resultType="GalleryVO">
+		<![CDATA[ 
+SELECT * FROM gallery WHERE gal_no ORDER BY  gal_no asc LIMIT #{limitStart}, #{listCount}
+		
+		
+		]]>
+		
+				
+	</select>
+	
+	<!-- 페이징  -->
+
+
+
+<select parameterType="GalleryVO" resultType="int" id="galleryCount">
+
+<![CDATA[
+         SELECT count(*) FROM gallery 
+         ]]>
+</select>
+
+<!--  ////////////gallery 삭제 기능//////////// -->
+
+<select parameterType="GalleryVO"  id="galleryDelete">
+
+<![CDATA[
+         delete from gallery where gal_no =#{gal_no} 
+         ]]>
+</select>		
+			
+<!-- 000000000000000000000000000000000000000adminpost3000000000000000000000000000000000000 -->
+
+		
+
+	<select id="adminpost3" parameterType="LossVO" resultType="LossVO">
+		<![CDATA[ 
+SELECT * FROM loss WHERE loss_no ORDER BY  loss_no asc LIMIT #{limitStart}, #{listCount}
+		
+		
+		]]>
+		
+				
+	</select>
+	
+	<!-- 페이징  -->
+
+
+
+<select parameterType="LossVO" resultType="int" id="lossCount">
+
+<![CDATA[
+         SELECT count(*) FROM loss 
+         ]]>
+</select>
+
+<!--  ////////////gallery 삭제 기능//////////// -->
+
+<select parameterType="LossVO"  id="lossDelete">
+
+<![CDATA[
+         delete from loss where loss_no =#{loss_no} 
+         ]]>
+</select>			
 </mapper>   
