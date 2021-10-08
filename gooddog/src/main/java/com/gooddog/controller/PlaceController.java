@@ -1,17 +1,14 @@
 package com.gooddog.controller;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.query.criteria.internal.expression.function.LengthFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +51,7 @@ public class PlaceController {
 	// 장소 목록 조회 - ajax로 필터링 키워드 값 받아옴 
 	@ResponseBody
 	@RequestMapping(value="/ajaxMapList", method=RequestMethod.POST)
-	public Object ajaxMapList(Criteria criteria,Model m) throws Exception{
+	public Object ajaxMapList(Criteria criteria, PlaceVO vo, Model m) throws Exception{
 		//String message = "통신완료지롱";
 		System.out.println("place_group: "+criteria.getPlace_group());
 		System.out.println("page: "+criteria.getPage());
@@ -83,12 +80,56 @@ public class PlaceController {
 		System.out.println(mapList);
 		System.out.println("paging: "+paging);
 		
+		List<Integer> countList = new ArrayList<Integer>();
+		List<Float> percentList = new ArrayList<Float>();
+		
+		
+		//mapList의 place_no를 통해서 리뷰 수와 리뷰 평가 값 가져오기 
+		for (int i=0; i<mapList.size(); i++) {
+			int place_no = Integer.parseInt(mapList.get(i).get("place_no").toString());
+			System.out.println("place_no: "+ place_no);
+			vo.setPlace_no(place_no);
+			
+			// 리뷰 개수 조회 
+			int count = placeService.reviewCount(vo);
+			
+			//리뷰 prevalue 검색
+			//[{pre_value=positive, count=2}, {pre_value=negative, count=2}, {pre_value=neutral, count=1}]
+			List<Map<String, Object>> prevalue= placeService.prevalue(vo); 
+			System.out.println(prevalue.isEmpty());	
+			int positive;
+			float percent;
+			
+			if (prevalue.isEmpty()) {
+				percent = 0; 
+			}
+			else {
+				//긍정 리뷰
+				positive = Integer.parseInt(prevalue.get(0).get("count").toString());
+				percent = ((float)positive/count)*100;
+			}
+			
+			countList.add(count);
+			percentList.add(percent);
+			
+		}
+		
+		System.out.println(countList);
+		System.out.println(percentList);
+		
+		
+
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("mapList",mapList);
 		map.put("place_group", criteria.getPlace_group());
 		map.put("placeCount",placeCount);
 		map.put("paging",paging);
 		map.put("keyword", criteria.getKeyword());
+		
+		map.put("countList", countList);
+		map.put("percentList",percentList);
+		
 
 		
 		return map;
